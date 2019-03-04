@@ -1,0 +1,4 @@
+xrandr --output DP1 --primary
+
+i3-msg '[workspace="^(1|2|4|5)"] move workspace to output DP1;'
+i3-msg '[workspace="^(3|4)"] move workspace to output eDP1;'
