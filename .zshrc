@@ -32,6 +32,8 @@ alias rosremote="rosenv && export ROS_MASTER_URI=http://192.168.0.24:11311 && ex
 # kitty
 kitty + complete setup zsh | source /dev/stdin
 alias ssh="kitty +kitten ssh"
+alias dark="kitty @ set-colors --all -c ~/.config/kitty/kitty-dark.conf"
+alias light="kitty @ set-colors --all -c ~/.config/kitty/kitty-light.conf"
 
 # jekyll
 export GEM_HOME=$HOME/coding/gems
@@ -65,3 +67,4 @@ alias colorline="sed 's/\-\s\[\s\]\s//g;s/@due(\([0-9]\+-[0-9]\+-[0-9]\+\))\s\(.
 alias reorder="sed -e 's/[[:graph:]]*\/\([[:alnum:]]*\)\.md:\(.*\)/\2 \1/g'"
 
 alias agenda="grep '@due' $MARKDO_ROOT/* | grep '\[\s\]' | colorline | reorder | sort -r | tail -n 10 | for_each_line print_line"
+

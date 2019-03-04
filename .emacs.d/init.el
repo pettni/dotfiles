@@ -19,14 +19,13 @@
 ;; Packages
 (require 'package)
 (add-to-list 'package-archives
-             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+	     '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-initialize)
 
 ;; Multiple cursors bindings
 (require 'multiple-cursors)
-(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
-(global-set-key (kbd "C->") 'mc/mark-next-like-this-word)
-(global-set-key (kbd "C-<") 'mc/mark-next-like-this-word)
+(global-set-key (kbd "C-c m c") 'mc/edit-lines)
+(global-set-key (kbd "C-M-d") 'mc/mark-next-like-this-word)
 
 ;; Latex settings
 (require `tex-site)

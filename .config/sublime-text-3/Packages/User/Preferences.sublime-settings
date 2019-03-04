@@ -1,5 +1,5 @@
 {
-	"color_scheme": "Packages/Solarized Color Scheme/Solarized (light).sublime-color-scheme",
+	"color_scheme": "Packages/Solarized Color Scheme/Solarized (dark).sublime-color-scheme",
 	"font_face": "Fira Code Medium",
 	"font_size": 14,
 	"ignored_packages":
@@ -7,5 +7,5 @@
 		"Vintage"
 	],
 	"spell_check": true,
-	"theme": "Default.sublime-theme"
+	"theme": "Adaptive.sublime-theme"
 }
