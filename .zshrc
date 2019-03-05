@@ -5,8 +5,8 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
-alias emacs="emacs -nw"
-export EDITOR="emacs -nw"
+alias emacs="TERM=xterm-color emacs -nw"
+export EDITOR="TERM=xterm-color emacs -nw"
 alias py2env="source ~/.venvs/py2env/bin/activate"
 alias py3env="source ~/.venvs/py3env/bin/activate"
 

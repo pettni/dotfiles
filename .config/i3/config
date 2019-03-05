@@ -107,14 +107,14 @@ assign [class="Mendeley Desktop"] workspace $ws5
 exec --no-startup-id i3-msg 'workspace $ws1; append_layout ~/.config/i3/workspace-1.json'
 
 exec --no-startup-id firefox
-exec --no-startup-id urxvt
-exec --no-startup-id urxvt
+exec --no-startup-id kitty
+exec --no-startup-id kitty
 
 #######################################################
 #                    i3 Keybindings                   #
 #######################################################
 
-bindsym $mod+Return exec urxvt
+bindsym $mod+Return exec kitty
 bindsym $mod+Shift+q kill
 
 # application launch
@@ -149,7 +149,7 @@ exec_always --no-startup-id $wall_prog $wall_type $wall_dir
 
 # gestures and scrolling
 exec --no-startup-id libinput-gestures
-exec --no-startup-id synclient VertScrollDelta=-27 HorizScrollDelta=-27 HorizTwoFingerScroll=1 PalmDetect=1
+exec --no-startup-id synclient VertScrollDelta=-27 HorizScrollDelta=-27 HorizTwoFingerScroll=1 PalmDetect=1 PalmMinZ=50 PalmMinWidth=5
 
 #######################################################
 #                    Media Hotkeys                    #
