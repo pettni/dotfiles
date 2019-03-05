@@ -16,6 +16,7 @@
       delete-old-versions t
       kept-new-versions 4
       kept-old-versions 2)
+
 ;; Packages
 (require 'package)
 (add-to-list 'package-archives
@@ -64,18 +65,3 @@
 (setq suggest-key-bindings t)
 (setq vc-follow-symlinks t)
 (setq column-number-mode t)
-(put 'downcase-region 'disabled nil)	;; Disable commands
-(put 'upcase-region 'disabled nil)
-
-;; Disable startup stuff
-(setq inhibit-startup-echo-area-message t)
-(setq inhibit-startup-message 1)
-
-;; Save backup and autosave files in backup dir
-(setq backup-directory-alist `((".*" . ,backup_dir)))
-(setq auto-save-file-name-transforms `((".*" ,backup_dir t)))
-(setq version-control t
-      backup-by-copying t
-      delete-old-versions t
-      kept-new-versions 4
-kept-old-versions 2)
