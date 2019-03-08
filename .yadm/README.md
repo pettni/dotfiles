@@ -5,7 +5,8 @@
 ```
 sudo apt install i3 xserver-xorg-input-libinput feh autorandr arandr unclutter \
                  compton redshift pulseaudio-utils geoclue-2.0 playerctl xbacklight rofi \
-                 xinput blueman network-manager thunar gthumb okular 
+                 xinput blueman network-manager thunar gthumb okular fonts-firacode \
+                 xdotool
 ```
 
 ## Install yadm and clone config
@@ -36,6 +37,8 @@ sudo apt install thunderbird firefox
 ```
 
 Not in apt:
+ - Dropbox: https://www.dropbox.com/install
+ - Font awesome: https://fontawesome.com/how-to-use/on-the-desktop/setup/getting-started
  - Mendeley: https://www.mendeley.com/download-desktop/#downloading
  - Joplin: https://github.com/laurent22/joplin
  - Sublime text: https://www.sublimetext.com/docs/3/linux_repositories.html
