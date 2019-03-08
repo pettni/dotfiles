@@ -17,7 +17,7 @@ set $ws9 9
 set $ws10 10
 
 # Border
-set $border_width	 2
+set $border_width	 3
 set $bg-color 	         #2f343f
 set $inactive-bg-color   #2f343f
 set $text-color          #f3f4f5
@@ -110,6 +110,10 @@ exec --no-startup-id firefox
 exec --no-startup-id kitty
 exec --no-startup-id kitty
 
+for_window [class="Thunar"] floating enable border normal
+for_window [class="Lxappearance"] floating enable border normal
+for_window [class="Gnome-font-viewer"] floating enable
+
 #######################################################
 #                    i3 Keybindings                   #
 #######################################################
@@ -158,9 +162,9 @@ exec --no-startup-id xinput set-prop 11 288 1  # natural scrolling
 #######################################################
 
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.config/i3/volumeControl.sh up #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id ~/.config/i3/volumeControl.sh down #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id ~/.config/i3/volumeControl.sh mute # mute sound
 
 # Screen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness
