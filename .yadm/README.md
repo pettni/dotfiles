@@ -6,7 +6,7 @@
 sudo apt install i3 xserver-xorg-input-libinput feh autorandr arandr unclutter \
                  compton redshift pulseaudio-utils geoclue-2.0 playerctl xbacklight rofi \
                  xinput blueman network-manager thunar gthumb okular fonts-firacode \
-                 xdotool
+                 xdotool lxappearancex arc-theme
 ```
 
 ## Install yadm and clone config
@@ -46,6 +46,7 @@ Not in apt:
  - libinput-gestures: https://github.com/bulletmark/libinput-gestures
  - Foxit reader: https://www.foxitsoftware.com/pdf-reader/
  - Emacs 26: https://launchpad.net/~kelleyk/+archive/ubuntu/emacs
+ - System San Francisco fonts: https://github.com/supermarin/YosemiteSanFranciscoFont
 
 ## Make sure libinput is managing touchpad
 
