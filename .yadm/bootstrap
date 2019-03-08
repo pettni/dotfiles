@@ -2,7 +2,7 @@
 
 font_links=("https://github.com/libertinus-fonts/libertinus/releases/download/v6.6/libertinus-6.6.zip" # libertinus
 	    "https://github.com/supermarin/YosemiteSanFranciscoFont/archive/master.zip"                # san fran
-	    "https://use.fontawesome.com/releases/v5.7.2/fontawesome-free-5.7.2-desktop.zip")          # libertinus
+	    "https://use.fontawesome.com/releases/v5.7.2/fontawesome-free-5.7.2-desktop.zip")          # awesome
 
 # Because Git submodule commands cannot operate without a work tree, they must
 # be run from within $HOME (assuming this is the root of your dotfiles)
