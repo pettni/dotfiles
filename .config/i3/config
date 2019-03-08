@@ -14,23 +14,29 @@ set $ws6 6
 set $ws7 7
 set $ws8 8
 set $ws9 9
-set $ws10 10
+set $ws10 "10:"
 
 # Border
-set $border_width	 3
+set $border_width	 4
 set $bg-color 	         #2f343f
+set $focused-bg-color    #268bd2
 set $inactive-bg-color   #2f343f
 set $text-color          #f3f4f5
 set $inactive-text-color #676E7D
 set $urgent-bg-color     #E53935
 
+# Gaps
+set $default_gaps_inner 10
+set $default_gaps_outer 5
+
 # Wallpaper
-set $wall_dir                   /usr/share/backgrounds/Carriage_Return_by_mendhak.jpg
-set $wall_type                  --bg-fill
-set $wall_prog                  feh
+set $wall_dir		~/.config/i3/background.jpg
 
 # Font
-set $font_name         pango:SFNS Display 12
+set $font_name		pango:SFNS Display 12
+
+# Touchpad
+set $touchpad_name	"DLL082A:01 06CB:76AF Touchpad"
 
 #######################################################
 #                     Workspaces                      #
@@ -103,6 +109,7 @@ exec --no-startup-id mendeleydesktop
 assign [class="Joplin"] workspace $ws4
 assign [class="Thunderbird"] workspace $ws3
 assign [class="Mendeley Desktop"] workspace $ws5
+assign [class="Spotify"] workspace $ws10
 
 exec --no-startup-id i3-msg 'workspace $ws1; append_layout ~/.config/i3/workspace-1.json'
 
@@ -113,6 +120,7 @@ exec --no-startup-id kitty
 for_window [class="Thunar"] floating enable
 for_window [class="Lxappearance"] floating enable border normal
 for_window [class="Gnome-font-viewer"] floating enable
+for_window [class="Arandr"] floating enable
 
 #######################################################
 #                    i3 Keybindings                   #
@@ -149,13 +157,12 @@ font $font_name
 default_border pixel $border_width
 # default_border normal
 
-exec_always --no-startup-id $wall_prog $wall_type $wall_dir
+exec_always --no-startup-id feh --bg-fill $wall_dir
 
-# gestures and scrolling
+# gestures and scrolling/tapping
 exec --no-startup-id libinput-gestures
-exec --no-startup-id xinput set-prop 11 280 1  # tapping
-exec --no-startup-id xinput set-prop 11 288 1  # natural scrolling
-
+exec --no-startup-id xinput set-prop $touchpad_name "libinput Tapping Enabled" 1
+exec --no-startup-id xinput set-prop $touchpad_name "libinput Natural Scrolling Enabled" 1
 
 #######################################################
 #                    Media Hotkeys                    #
@@ -171,10 +178,12 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # decrease screen brightness
 
 # Media player controls
-bindsym XF86AudioPlay exec playerctl play
-bindsym XF86AudioPause exec playerctl pause
+bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
+
+# SplitScreen
+bindsym Mod4+p exec arandr
 
 #######################################################
 #                    Focus/Stacking                   #
@@ -245,10 +254,10 @@ bindsym $mod+r mode "resize"
 #######################################################
 
 #                       border             background         text                 indicator
-client.focused          $bg-color          $bg-color          $text-color          #00ff00
-client.unfocused        $inactive-bg-color $inactive-bg-color $inactive-text-color #00ff00
-client.focused_inactive $inactive-bg-color $inactive-bg-color $inactive-text-color #00ff00
-client.urgent           $urgent-bg-color   $urgent-bg-color   $text-color          #00ff00
+client.focused          $focused-bg-color  $focused-bg-color  $text-color          $bg-color
+client.unfocused        $inactive-bg-color $inactive-bg-color $inactive-text-color $inactive-bg-color
+client.focused_inactive $inactive-bg-color $inactive-bg-color $inactive-text-color $inactive-bg-color
+client.urgent           $urgent-bg-color   $urgent-bg-color   $text-color          $urgent-bg-color
 
 hide_edge_borders both
 
@@ -262,7 +271,7 @@ bar {
     separator #757575
     statusline           #dddddd    
     #                  border             background         text
-    focused_workspace  $bg-color          $bg-color          $text-color
+    focused_workspace  $bg-color  $bg-color  $text-color
     inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
     urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color  	 
   }
@@ -273,3 +282,134 @@ bar {
   workspace_buttons yes
 }
 
+#######################################################
+#                       Gaps                          #
+#######################################################
+
+gaps inner $default_gaps_inner
+gaps outer $default_gaps_outer
+
+smart_gaps on  # (off/on/inverse_outer) no gaps for single app
+smart_borders on # no borders for single app
+
+bindsym $mod+g mode "$mode_gaps"
+
+set $mode_gaps Gaps: (o)uter, (i)nner, (h)orizontal, (v)ertical, (t)op, (r)ight, (b)ottom, (l)eft
+set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_horiz Horizontal Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_verti Vertical Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_top Top Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_right Right Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_bottom Bottom Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_left Left Gaps: +|-|0 (local), Shift + +|-|0 (global)
+
+mode "$mode_gaps" {
+        bindsym o      mode "$mode_gaps_outer"
+        bindsym i      mode "$mode_gaps_inner"
+        bindsym h      mode "$mode_gaps_horiz"
+        bindsym v      mode "$mode_gaps_verti"
+        bindsym t      mode "$mode_gaps_top"
+        bindsym r      mode "$mode_gaps_right"
+        bindsym b      mode "$mode_gaps_bottom"
+        bindsym l      mode "$mode_gaps_left"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+mode "$mode_gaps_outer" {
+        bindsym plus  gaps outer current plus 5
+        bindsym minus gaps outer current minus 5
+        bindsym 0     gaps outer current set 0
+
+        bindsym Shift+plus  gaps outer all plus 5
+        bindsym Shift+minus gaps outer all minus 5
+        bindsym Shift+0     gaps outer all set 0
+
+        bindsym Return mode "$mode_gaps"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_inner" {
+        bindsym plus  gaps inner current plus 5
+        bindsym minus gaps inner current minus 5
+        bindsym 0     gaps inner current set 0
+
+        bindsym Shift+plus  gaps inner all plus 5
+        bindsym Shift+minus gaps inner all minus 5
+        bindsym Shift+0     gaps inner all set 0
+
+        bindsym Return mode "$mode_gaps"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_horiz" {
+        bindsym plus  gaps horizontal current plus 5
+        bindsym minus gaps horizontal current minus 5
+        bindsym 0     gaps horizontal current set 0
+
+        bindsym Shift+plus  gaps horizontal all plus 5
+        bindsym Shift+minus gaps horizontal all minus 5
+        bindsym Shift+0     gaps horizontal all set 0
+
+        bindsym Return mode "$mode_gaps"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_verti" {
+        bindsym plus  gaps vertical current plus 5
+        bindsym minus gaps vertical current minus 5
+        bindsym 0     gaps vertical current set 0
+
+        bindsym Shift+plus  gaps vertical all plus 5
+        bindsym Shift+minus gaps vertical all minus 5
+        bindsym Shift+0     gaps vertical all set 0
+
+        bindsym Return mode "$mode_gaps"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_top" {
+        bindsym plus  gaps top current plus 5
+        bindsym minus gaps top current minus 5
+        bindsym 0     gaps top current set 0
+
+        bindsym Shift+plus  gaps top all plus 5
+        bindsym Shift+minus gaps top all minus 5
+        bindsym Shift+0     gaps top all set 0
+
+        bindsym Return mode "$mode_gaps"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_right" {
+        bindsym plus  gaps right current plus 5
+        bindsym minus gaps right current minus 5
+        bindsym 0     gaps right current set 0
+
+        bindsym Shift+plus  gaps right all plus 5
+        bindsym Shift+minus gaps right all minus 5
+        bindsym Shift+0     gaps right all set 0
+
+        bindsym Return mode "$mode_gaps"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_bottom" {
+        bindsym plus  gaps bottom current plus 5
+        bindsym minus gaps bottom current minus 5
+        bindsym 0     gaps bottom current set 0
+
+        bindsym Shift+plus  gaps bottom all plus 5
+        bindsym Shift+minus gaps bottom all minus 5
+        bindsym Shift+0     gaps bottom all set 0
+
+        bindsym Return mode "$mode_gaps"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_left" {
+        bindsym plus  gaps left current plus 5
+        bindsym minus gaps left current minus 5
+        bindsym 0     gaps left current set 0
+
+        bindsym Shift+plus  gaps left all plus 5
+        bindsym Shift+minus gaps left all minus 5
+        bindsym Shift+0     gaps left all set 0
+
+        bindsym Return mode "$mode_gaps"
+        bindsym Escape mode "default"
+}
