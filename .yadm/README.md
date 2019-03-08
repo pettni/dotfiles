@@ -6,7 +6,7 @@
 sudo apt install i3 xserver-xorg-input-libinput feh autorandr arandr unclutter \
                  compton redshift pulseaudio-utils geoclue-2.0 playerctl xbacklight rofi \
                  xinput blueman network-manager thunar gthumb okular fonts-firacode \
-                 xdotool
+                 xdotool lxappearancex arc-theme
 ```
 
 ## Install yadm and clone config
