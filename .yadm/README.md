@@ -8,7 +8,7 @@ sudo apt install i3 xserver-xorg-input-libinput feh autorandr arandr unclutter k
 
 ## Make sure libinput is managing touchpad
 
-Check ```/usr/share/X11.xorg.conf.d/```
+Check ```/usr/share/X11/xorg.conf.d/```
 
 If necessary uninstall synaptics
 ```
