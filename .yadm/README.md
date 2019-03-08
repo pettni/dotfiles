@@ -3,12 +3,12 @@
 ```
 sudo apt install i3 xserver-xorg-input-libinput feh autorandr arandr unclutter kitty \
                  compton redshift pulseaudio-utils geoclue-2.0 playerctl xbacklight rofi \
-                 xinput blueman network-manager thunar xdotool lxappearancex arc-theme 
+                 xinput blueman network-manager thunar xdotool lxappearance arc-theme 
 ```
 
 ## Make sure libinput is managing touchpad
 
-Check ```/usr/share/X11.xorg.conf.d/```
+Check ```/usr/share/X11/xorg.conf.d/```
 
 If necessary uninstall synaptics
 ```
