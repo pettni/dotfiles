@@ -134,7 +134,7 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 bindsym $mod+Shift+x exec i3lock --color "$bg-color"
 
 # language
-bindsym $mod+space exec ~/.config/i3/i3-keyboard-layout cycle us se
+bindsym $mod+space exec ~/.config/i3status/keyboard-layout/i3-keyboard-layout cycle us se
 
 #######################################################
 #                         Misc                        #

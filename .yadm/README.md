@@ -32,6 +32,7 @@ Add user to group ```geoclue```
 sudo apt install yadm
 yadm clone git@github.com:pettni/dotfiles.git
 ```
+Run bootstrap script when prompted to init submodules and install some fonts
 
 # Set up login manager
 
@@ -78,15 +79,3 @@ Not in apt:
  - Joplin: https://github.com/laurent22/joplin
  - libinput-gestures: https://github.com/bulletmark/libinput-gestures
  - Foxit reader: https://www.foxitsoftware.com/pdf-reader/
-
-# Fonts
-
-```
-sudo apt install fonts-firacode
-```
-
- - Libertinus: https://github.com/libertinus-fonts/libertinus
- - System San Francisco fonts: https://github.com/supermarin/YosemiteSanFranciscoFont
- - Font awesome: https://fontawesome.com/how-to-use/on-the-desktop/setup/getting-started
-
-Download and move font files to ```~/.local/share/fonts```

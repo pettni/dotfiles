@@ -1,8 +1,23 @@
 #!/bin/bash
 
+font_links=("https://github.com/libertinus-fonts/libertinus/releases/download/v6.6/libertinus-6.6.zip" # libertinus
+	    "https://github.com/supermarin/YosemiteSanFranciscoFont/archive/master.zip"                # san fran
+	    "https://use.fontawesome.com/releases/v5.7.2/fontawesome-free-5.7.2-desktop.zip")          # libertinus
+
 # Because Git submodule commands cannot operate without a work tree, they must
 # be run from within $HOME (assuming this is the root of your dotfiles)
 cd "$HOME"
 
-echo "Init submodules"
+printf "Init submodules ...\n"
 yadm submodule update --recursive --init
+printf "Finished submodules \n\n"
+
+printf "Installing fonts ...\n"
+for file in ${font_links[@]}
+do
+    printf "Downloading $file"
+    wget -cq $file -O tmp.zip && unzip -j tmp.zip '*.otf' '*.ttf' -d ~/.local/share/fonts ; rm tmp.zip
+done
+printf "Finished fonts \n\n"
+
+printf "Done"
