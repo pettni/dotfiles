@@ -262,7 +262,7 @@ bar {
     inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
     urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color  	 
   }
-  status_command i3status | ~/.config/i3/i3-keyboard-layout i3status
+  status_command i3status | ~/.config/i3status/keyboard-layout/i3-keyboard-layout i3status
   # status_command i3blocks
   position top
   strip_workspace_numbers yes
