@@ -42,6 +42,7 @@ Not in apt:
  - Kitty (apt version too old): https://sw.kovidgoyal.net/kitty/
  - libinput-gestures: https://github.com/bulletmark/libinput-gestures
  - Foxit reader: https://www.foxitsoftware.com/pdf-reader/
+ - Emacs 26: https://launchpad.net/~kelleyk/+archive/ubuntu/emacs
 
 ## Make sure libinput is managing touchpad
 
