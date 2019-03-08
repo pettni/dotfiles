@@ -46,6 +46,7 @@ Not in apt:
  - libinput-gestures: https://github.com/bulletmark/libinput-gestures
  - Foxit reader: https://www.foxitsoftware.com/pdf-reader/
  - Emacs 26: https://launchpad.net/~kelleyk/+archive/ubuntu/emacs
+ - System San Francisco fonts: https://github.com/supermarin/YosemiteSanFranciscoFont
 
 ## Make sure libinput is managing touchpad
 
