@@ -1,7 +1,7 @@
 # I3 Window Manager
 
 ```
-sudo apt install i3 xserver-xorg-input-libinput feh autorandr arandr unclutter \
+sudo apt install i3 xserver-xorg-input-libinput feh autorandr arandr unclutter kitty \
                  compton redshift pulseaudio-utils geoclue-2.0 playerctl xbacklight rofi \
                  xinput blueman network-manager thunar xdotool lxappearancex arc-theme 
 ```
@@ -46,22 +46,38 @@ autologin-user=petter
 autologin-user-timeout=0%
 ```
 
-# Install apps
+# Install Apps
 
-In apt:
+From apt:
 ```
 sudo apt install thunderbird firefox gthumb okular
 ```
 
+From other package repositories:
+```
+sudo apt-get install apt-transport-https
+
+# Emacs 26
+sudo add-apt-repository ppa:kelleyk/emacs
+
+# Sublime
+wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
+echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
+
+# Mendeley
+echo "deb https://desktop-download.mendeley.com/download/apt stable main" | sudo tee /etc/apt/sources.list.d/mendeleydesktop.list
+
+# Dropbox
+echo "deb [arch=i386,amd64] https://linux.dropboxstatic.com/ubuntu/ cosmic main" | sudo tee /etc/apt/sources.list.d/dropbox.list
+
+sudo apt update
+sudo apt install emacs26 sublime-text mendeleydesktop dropbox
+```
+
 Not in apt:
- - Dropbox: https://www.dropbox.com/install
- - Mendeley: https://www.mendeley.com/download-desktop/#downloading
  - Joplin: https://github.com/laurent22/joplin
- - Sublime text: https://www.sublimetext.com/docs/3/linux_repositories.html
- - Kitty (apt version too old): https://sw.kovidgoyal.net/kitty/
  - libinput-gestures: https://github.com/bulletmark/libinput-gestures
  - Foxit reader: https://www.foxitsoftware.com/pdf-reader/
- - Emacs 26: https://launchpad.net/~kelleyk/+archive/ubuntu/emacs
 
 # Fonts
 
