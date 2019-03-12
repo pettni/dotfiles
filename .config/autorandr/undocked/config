@@ -1,10 +1,11 @@
-output DP-1
+output DP1
 off
-output DP-2
+output DP2
 off
-output eDP-1
-gamma 1.163:1.0:0.909
+output VIRTUAL1
+off
+output eDP1
+primary
 mode 1920x1080
 pos 0x0
-primary
 rate 59.93

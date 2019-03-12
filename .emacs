@@ -81,8 +81,16 @@
 
   (use-package latex
     :config
-    (add-hook `latex-mode-hook `flyspell-mode)
-    (add-hook `tex-mode-hook `flyspell-mode)
-    (add-hook `bibtex-mode-hook `flyspell-mode)
-    (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
-    (add-hook `LaTeX-mode-hook `turn-on-reftex)))
+    (add-hook `latex-mode-hook 'flyspell-mode)
+    (add-hook `tex-mode-hook 'flyspell-mode)
+    (add-hook `bibtex-mode-hook 'flyspell-mode)
+    (add-hook `LaTeX-mode-hook 'LaTeX-math-mode)
+    (add-hook `LaTeX-mode-hook 'turn-on-reftex)
+    (add-hook `LaTeX-mode-hook 'tex-pdf-mode)    
+    ;;(add-hook `LaTeX-mode-hook '(TeX-source-correlate-method (quote synctex)))
+    (add-hook `LaTeX-mode-hook 'TeX-source-correlate-mode t)
+    (add-hook `LaTeX-mode-hook 'TeX-source-correlate-start-server t)
+    ;;(add-hook 'LaTeX-mode-hook '(TeX-view-program-list (quote (("Okular" "okular --unique %o#src:%n%b")))))
+    ;;(add-hook 'Latex-mode-hook  '(TeX-view-program-selection (quote ((engine-omega "dvips and gv") (output-dvi "xdvi") (output-pdf "Okular") (output-html "xdg-open")))))
+    ))
+(setq TeX-view-program-selection '((output-pdf "Okular")))
