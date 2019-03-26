@@ -33,7 +33,7 @@ set $default_gaps_outer 5
 set $wall_dir		~/.config/i3/background.jpg
 
 # Font
-set $font_name		pango:SFNS Display 12
+set $font_name		pango:SFNS Display 10
 
 # Touchpad
 set $touchpad_name	"DLL082A:01 06CB:76AF Touchpad"
@@ -160,7 +160,7 @@ font $font_name
 default_border pixel $border_width
 # default_border normal
 
-exec_always --no-startup-id feh --bg-fill $wall_dir
+
 
 # gestures and scrolling/tapping
 exec --no-startup-id libinput-gestures
@@ -287,6 +287,8 @@ bar {
   workspace_buttons yes
   tray_output primary
 }
+
+exec_always --no-startup-id nitrogen --restore
 
 #######################################################
 #                       Gaps                          #
@@ -419,3 +421,4 @@ mode "$mode_gaps_left" {
         bindsym Return mode "$mode_gaps"
         bindsym Escape mode "default"
 }
+
