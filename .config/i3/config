@@ -151,7 +151,7 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -f $font_name -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # lock screen
-bindsym $mod+Shift+x exec i3lock --color "$bg-color"
+bindsym $mod+Shift+x exec i3lock-fancy -g -f SFNS-Display
 
 # language
 bindsym $mod+space exec ~/.config/i3status/keyboard-layout/i3-keyboard-layout cycle us se
@@ -281,7 +281,7 @@ bar {
   colors {
     background $bg-color
     separator  $focus-color
-    statusline $focus-color
+    statusline $inactive-text-color
     #                  border             background        text
     focused_workspace  $bg-color          $bg-color     $focus-color
     active_workspace   $bg-color          $bg-color     $focus-color    
