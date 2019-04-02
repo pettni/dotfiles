@@ -26,7 +26,7 @@ export JAILHOUSE_INMATE_LD=${LINARO_DIR}/bin/aarch64-elf-ld
 export PATH=$PATH:${STANDARD_DIR}/bin:${LINARO_DIR}/bin
 
 # ros
-alias rosenv="source ~/software/ros_catkin_ws/devel_isolated/setup.zsh && source ~/coding/catkin_ws/devel/setup.zsh"
+alias rosenv="source ~/software/catkin_ros/devel_isolated/setup.zsh && source ~/coding/catkin_ws/devel/setup.zsh"
 alias rosremote="rosenv && export ROS_MASTER_URI=http://192.168.0.24:11311 && export ROS_IP=192.168.0.18"
 
 # kitty
