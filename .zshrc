@@ -1,7 +1,7 @@
 export ZSH="/home/petter/.oh-my-zsh"
 export ZSH_THEME="robbyrussell"
 plugins=(
-  git, ubuntu, command-not-found
+  command-not-found
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -11,7 +11,13 @@ alias py2env="source ~/.venvs/py2env/bin/activate"
 alias py3env="source ~/.venvs/py3env/bin/activate"
 
 # mosek
-export MOSEKLM_LICENSE_FILE="~/software/mosek/mosek.lic"
+export MOSEKLM_LICENSE_FILE=~/software/mosek/mosek.lic
+
+# gurobi
+export GUROBI_HOME=$HOME/software/gurobi811/linux64
+export GRB_LICENSE_FILE=$HOME/software/gurobi811/gurobi.lic
+export PATH=${PATH}:${GUROBI_HOME}/bin
+export LD_LIBRARY_PATH=${GUROBI_HOME}/lib
 
 # erika/jailhouse
 export LINARO_DIR=/opt/gcc-linaro-7.3.1-2018.05-x86_64_aarch64-elf
@@ -65,6 +71,4 @@ c_end=`tput sgr0`
 
 alias colorline="sed 's/\-\s\[\s\]\s//g;s/@due(\([0-9]\+-[0-9]\+-[0-9]\+\))\s\(.*\)/${c_date}\1${c_end} ${c_text}\2${c_end}/g'"
 alias reorder="sed -e 's/[[:graph:]]*\/\([[:alnum:]]*\)\.md:\(.*\)/\2 \1/g'"
-
 alias agenda="grep '@due' $MARKDO_ROOT/* | grep '\[\s\]' | colorline | reorder | sort -r | tail -n 10 | for_each_line print_line"
-
