@@ -1,3 +1,10 @@
 .ssh/id_rsa*
+
 .local/bin/coins
 .local/bin/pycoins
+
+.gnupg/pubring.kbx
+.gnupg/pubring.kbx~
+.gnupg/trustdb.gpg
+.gnupg/openpgp-revocs.d/*
+.gnupg/private-keys-v1.d/*
