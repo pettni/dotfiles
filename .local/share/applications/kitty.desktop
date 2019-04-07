@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=kitty
+GenericName=Terminal emulator
+Comment=A fast, feature full, GPU based terminal emulator
+TryExec=/home/petter/.local/bin/kitty
+Exec=/home/petter/.local/bin/kitty
+Icon=kitty
+Categories=System;TerminalEmulator;

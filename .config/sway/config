@@ -6,10 +6,10 @@
 set $mod Mod4
 
 # Workspaces
-set $ws1 "1:"
-set $ws2 "2:"
-set $ws3 "3:"
-set $ws4 "4:"
+set $ws1 "1:"
+set $ws2 "2:"
+set $ws3 "3:"
+set $ws4 "4:"
 set $ws5 "5:"
 set $ws6 6
 set $ws7 7
@@ -21,25 +21,58 @@ set $ws10 "10:"
 set $border_width    1
 
 # Colors
-# set $bg-color             #2f343f
-# set $focus-color          #268bd2
-# set $fg-color             #f3f4f5
-# set $inactive-text-color  #676E7D
-
-set $bg-color			       #2f343f
-set_from_resource $fg-color            i3wm.foreground #f3f4f5
-set_from_resource $focus-color         i3wm.color1  #268bd2
-set_from_resource $inactive-text-color i3wm.color4  #676E7D
+set $bg-color		   #2f343f
+set $fg-color              #cfdbea
+set $focus-color           #4B74AE
+set $inactive-text-color   #99A0A8
+set $wallpaper /home/petter/.config/backgrounds/wintersea.jpg
 
 # Gaps
 set $default_gaps_inner 10
-set $default_gaps_outer 5
+set $default_gaps_outer 0
+
+# Terminal
+set $term $HOME/.local/bin/kitty
+set $menu rofi -show drun
 
 # Font
 set $font_name      pango:SFNS Display 11
+set $font_name_not  pango:SFNS Display 15
 
-# Touchpad
-set $touchpad_name  "DLL082A:01 06CB:76AF Touchpad"
+# Peripherals
+set $touchpad_name "1739:30383:DLL082A:01_06CB:76AF_Touchpad"
+set $keyboard_name "16700:12317:Dell_Dell_Universal_Receiver"
+set $mouse_name "16700:12317:Dell_Dell_Universal_Receiver_Mouse"
+set $laptop_mon "Sharp Corporation 0x1449 0x00000000"
+set $home_mon "Dell Inc. DELL U2518D 0WG2J7AEBHCL"
+
+#######################################################
+#                   Peripherals                       #
+#######################################################
+
+input $touchpad_name {
+  natural_scroll enabled
+  tap enabled
+  dwt enabled
+}
+
+input $keyboard_name {
+  xkb_layout us,se
+  xkb_options grp:win_space_toggle
+}
+
+input $mouse_name {
+  scroll_factor 3
+}
+
+output $laptop_mon resolution 1920x1080 position 0,0
+output $home_mon resolution 2560x1440 position 1920,0
+
+output * bg $wallpaper fill
+
+font $font_name
+
+default_border pixel $border_width
 
 #######################################################
 #                     Workspaces                      #
@@ -73,129 +106,111 @@ bindsym Ctrl+$mod+Left workspace prev
 bindsym Ctrl+$mod+Right workspace next
 
 #######################################################
-#                     Outputs                         #
+#                     Applications                    #
 #######################################################
 
-workspace $ws1 output DP1
-workspace $ws2 output DP1
-workspace $ws3 output eDP1
-workspace $ws4 output eDP1
-workspace $ws5 output DP1
-workspace $ws6 output DP1
-workspace $ws7 output DP1
-workspace $ws8 output DP1
-workspace $ws9 output DP1
-workspace $ws10 output DP1
+assign [class="Thunderbird"] workspace $ws1
+assign [class="Joplin"] workspace $ws2
+assign [class="Mendeley Desktop"] workspace $ws5
+assign [class="Spotify"] workspace $ws10
+
+for_window [app_id="thunar"] floating enable
+for_window [app_id="pavucontrol"] floating enable
+for_window [app_id="gnome-calculator"] floating enable
+for_window [app_id="gnome-font-viewer"] floating enable
+
+for_window [class="Gpick"] floating enable
+for_window [class="Lxappearance"] floating enable
+for_window [class="Signal"] floating enable
+for_window [class="Skype"] floating enable
+
+for_window [app_id="sublime"] opacity 0.95
+
+# gtk theme
+exec_always ~/.config/sway/import-gsettings \
+    gtk-theme:gtk-theme-name \
+    icon-theme:gtk-icon-theme-name \
+    cursor-theme:gtk-cursor-theme-name
+
+# tray applets
+# exec nm-applet
+# exec blueman-applet
+
+# daemons
+exec /usr/lib/geoclue-2.0/demos/agent
+exec redshift
+exec dropbox start
+exec libinput-gestures-setup restart
+exec ~/software/mako/build/mako --font "$font_name_not" --background-color "$bg-color" --text-color "$fg-color" --border-color "$focus-color" --border-size 2 --icons 1 --default-timeout 4000 --max-visible 4
+
+# applications
+exec unclutter
+exec thunderbird
+exec ~/.joplin/Joplin.AppImage
+exec mendeleydesktop
+
+#######################################################
+#                  sway Keybindings                   #
+#######################################################
+
+bindsym $mod+Return exec $term
+bindsym $mod+Shift+q kill
+
+# application launch
+bindsym $mod+d exec $menu
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# exit sway (logs you out of your X session)
+bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+
+# lock screen
+bindsym $mod+Shift+x exec swaylock -f -i $wallpaper -e --font "$font_name_not" --indicator-radius 100 --inside-color "$bg-color" --ring-color "$focus-color" --text-color "$fg-color"
+
+#######################################################
+#                       Outputs                       #
+#######################################################
+
+workspace $ws1 output eDP-1
+workspace $ws2 output eDP-1
+workspace $ws3 output DP-1
+workspace $ws4 output DP-1
+workspace $ws5 output DP-1
+workspace $ws6 output DP-1
+workspace $ws7 output DP-1
+workspace $ws8 output DP-1
+workspace $ws9 output DP-1
+workspace $ws10 output DP-1
 
 bindsym Ctrl+Shift+$mod+Right move workspace to output right
 bindsym Ctrl+Shift+$mod+Left move workspace to output left
 bindsym Ctrl+Shift+$mod+Up move workspace to output up
 bindsym Ctrl+Shift+$mod+Down move workspace to output down
 
-exec --no-startup-id autorandr -c
-
-#######################################################
-#                     Applications                    #
-#######################################################
-
-exec --no-startup-id compton -f
-
-exec --no-startup-id dropbox start
-exec --no-startup-id nm-applet
-exec --no-startup-id blueman-applet
-exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent
-exec --no-startup-id redshift
-exec --no-startup-id unclutter
-
-exec --no-startup-id thunderbird
-exec --no-startup-id ~/.joplin/Joplin.AppImage
-exec --no-startup-id mendeleydesktop
-
-assign [class="Joplin"] workspace $ws4
-assign [class="Thunderbird"] workspace $ws3
-assign [class="Mendeley Desktop"] workspace $ws5
-assign [class="Spotify"] workspace $ws10
-
-# workspace 1 default setup
-exec --no-startup-id i3-msg 'workspace $ws1; append_layout ~/.config/i3/workspace-1.json'
-
-exec --no-startup-id firefox
-exec --no-startup-id kitty
-exec --no-startup-id kitty
-
-for_window [class="Thunar"] floating enable
-for_window [class="Pavucontrol"] floating enable border normal
-for_window [class="Gnome-calculator"] floating enable
-for_window [class="Gpick"] floating enable
-for_window [class="Lxappearance"] floating enable border normal
-for_window [class="Gnome-font-viewer"] floating enable
-for_window [class="Arandr"] floating enable
-for_window [class="Signal"] floating enable border normal
-for_window [class="Skype"] floating enable border normal
-
-#######################################################
-#                    i3 Keybindings                   #
-#######################################################
-
-bindsym $mod+Return exec kitty
-bindsym $mod+Shift+q kill
-
-# application launch
-bindsym $mod+d exec --no-startup-id rofi -show drun
-
-# reload the configuration file
-bindsym $mod+Shift+c reload
-
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
-
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -f $font_name -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-
-# lock screen
-bindsym $mod+Shift+x exec i3lock-fancy -g -f SFNS-Display
-
-# language
-bindsym $mod+space exec ~/.config/i3status/keyboard-layout/i3-keyboard-layout cycle us se
-
-#######################################################
-#                         Misc                        #
-#######################################################
-
-font $font_name
-
-default_border pixel $border_width
-# default_border normal
-
-# gestures and scrolling/tapping
-exec --no-startup-id libinput-gestures
-exec --no-startup-id xinput set-prop $touchpad_name "libinput Tapping Enabled" 1
-exec --no-startup-id xinput set-prop $touchpad_name "libinput Natural Scrolling Enabled" 1
-
-# set colors and background (via autorandr)
-exec --no-startup-id wal -Rn
-exec --no-startup-id autorandr --change
+exec swayidle -w \
+          timeout 300 'swaylock -f -c 000000' \
+          timeout 600 'swaymsg "output * dpms off"' \
+               resume 'swaymsg "output * dpms on"' \
+          before-sleep 'swaylock -f -c 000000'
 
 #######################################################
 #                    Media Hotkeys                    #
 #######################################################
 
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.config/i3/volumeControl.sh up #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id ~/.config/i3/volumeControl.sh down #decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id ~/.config/i3/volumeControl.sh mute # mute sound
+bindsym XF86AudioRaiseVolume exec ~/.config/i3/volumeControl.sh up #increase sound volume
+bindsym XF86AudioLowerVolume exec ~/.config/i3/volumeControl.sh down #decrease sound volume
+bindsym XF86AudioMute exec ~/.config/i3/volumeControl.sh mute # mute sound
 
 # Screen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec brightnessctl set 10%+
+bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
 
 # Media player controls
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
-
-# SplitScreen
-bindsym Mod4+p exec arandr
 
 #######################################################
 #                    Focus/Stacking                   #
@@ -220,7 +235,10 @@ bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+Shift+space exec ~/.config/i3/float.sh
+bindsym $mod+Shift+space floating toggle
+
+# drag floating
+floating_modifier $mod normal
 
 # change focus between tiling / floating windows
 bindsym $mod+Shift+Ctrl+space focus mode_toggle
@@ -234,26 +252,20 @@ bindsym $mod+a focus parent
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
+# Move the currently focused window to the scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym $mod+minus scratchpad show
+
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
-
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
         bindsym j resize shrink width 10 px or 10 ppt
         bindsym k resize grow height 10 px or 10 ppt
         bindsym l resize shrink height 10 px or 10 ppt
         bindsym semicolon resize grow width 10 px or 10 ppt
 
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
-
-        # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
         bindsym Escape mode "default"
         bindsym $mod+r mode "default"
@@ -278,8 +290,10 @@ hide_edge_borders both
 #######################################################
 
 bar {
-  output DP1
-  output eDP1
+  position top
+  strip_workspace_numbers yes  
+  tray_output none
+  status_command i3status
   colors {
     background $bg-color
     separator  $focus-color
@@ -290,11 +304,6 @@ bar {
     inactive_workspace $bg-color          $bg-color     $inactive-text-color
     urgent_workspace   $focus-color       $focus-color  $inactive-text-color     
   }
-  status_command i3status | ~/.config/i3status/keyboard-layout/i3-keyboard-layout i3status
-  position top
-  strip_workspace_numbers yes
-  workspace_buttons yes
-  tray_output primary
 }
 
 #######################################################
@@ -305,127 +314,126 @@ gaps inner $default_gaps_inner
 gaps outer $default_gaps_outer
 
 smart_gaps on  # (off/on/inverse_outer) no gaps for single app
-smart_borders on # no borders for single app
+smart_borders on
 
-bindsym $mod+g mode "$mode_gaps"
+set $mode_gaps "Gaps: (o)uter, (i)nner, (h)orizontal, (v)ertical, (t)op, (r)ight, (b)ottom, (l)eft"
+set $mode_gaps_outer "Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)"
+set $mode_gaps_inner "Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)"
+set $mode_gaps_horiz "Horizontal Gaps: +|-|0 (local), Shift + +|-|0 (global)"
+set $mode_gaps_verti "Vertical Gaps: +|-|0 (local), Shift + +|-|0 (global)"
+set $mode_gaps_top "Top Gaps: +|-|0 (local), Shift + +|-|0 (global)"
+set $mode_gaps_right "Right Gaps: +|-|0 (local), Shift + +|-|0 (global)"
+set $mode_gaps_bottom "Bottom Gaps: +|-|0 (local), Shift + +|-|0 (global)"
+set $mode_gaps_left "Left Gaps: +|-|0 (local), Shift + +|-|0 (global)"
 
-set $mode_gaps Gaps: (o)uter, (i)nner, (h)orizontal, (v)ertical, (t)op, (r)ight, (b)ottom, (l)eft
-set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
-set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
-set $mode_gaps_horiz Horizontal Gaps: +|-|0 (local), Shift + +|-|0 (global)
-set $mode_gaps_verti Vertical Gaps: +|-|0 (local), Shift + +|-|0 (global)
-set $mode_gaps_top Top Gaps: +|-|0 (local), Shift + +|-|0 (global)
-set $mode_gaps_right Right Gaps: +|-|0 (local), Shift + +|-|0 (global)
-set $mode_gaps_bottom Bottom Gaps: +|-|0 (local), Shift + +|-|0 (global)
-set $mode_gaps_left Left Gaps: +|-|0 (local), Shift + +|-|0 (global)
+bindsym $mod+g mode $mode_gaps
 
-mode "$mode_gaps" {
-        bindsym o      mode "$mode_gaps_outer"
-        bindsym i      mode "$mode_gaps_inner"
-        bindsym h      mode "$mode_gaps_horiz"
-        bindsym v      mode "$mode_gaps_verti"
-        bindsym t      mode "$mode_gaps_top"
-        bindsym r      mode "$mode_gaps_right"
-        bindsym b      mode "$mode_gaps_bottom"
-        bindsym l      mode "$mode_gaps_left"
+mode $mode_gaps {
+        bindsym o      mode $mode_gaps_outer
+        bindsym i      mode $mode_gaps_inner
+        bindsym h      mode $mode_gaps_horiz
+        bindsym v      mode $mode_gaps_verti
+        bindsym t      mode $mode_gaps_top
+        bindsym r      mode $mode_gaps_right
+        bindsym b      mode $mode_gaps_bottom
+        bindsym l      mode $mode_gaps_left
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
 
-mode "$mode_gaps_outer" {
-        bindsym plus  gaps outer current plus 5
+mode $mode_gaps_outer {
+        bindsym equal  gaps outer current plus 5
         bindsym minus gaps outer current minus 5
         bindsym 0     gaps outer current set 0
 
-        bindsym Shift+plus  gaps outer all plus 5
+        bindsym Shift+equal  gaps outer all plus 5
         bindsym Shift+minus gaps outer all minus 5
         bindsym Shift+0     gaps outer all set 0
 
-        bindsym Return mode "$mode_gaps"
+        bindsym Return mode $mode_gaps
         bindsym Escape mode "default"
 }
-mode "$mode_gaps_inner" {
-        bindsym plus  gaps inner current plus 5
+mode $mode_gaps_inner {
+        bindsym equal  gaps inner current plus 5
         bindsym minus gaps inner current minus 5
         bindsym 0     gaps inner current set 0
 
-        bindsym Shift+plus  gaps inner all plus 5
+        bindsym Shift+equal  gaps inner all plus 5
         bindsym Shift+minus gaps inner all minus 5
         bindsym Shift+0     gaps inner all set 0
 
-        bindsym Return mode "$mode_gaps"
+        bindsym Return mode $mode_gaps
         bindsym Escape mode "default"
 }
-mode "$mode_gaps_horiz" {
-        bindsym plus  gaps horizontal current plus 5
+mode $mode_gaps_horiz {
+        bindsym equal  gaps horizontal current plus 5
         bindsym minus gaps horizontal current minus 5
         bindsym 0     gaps horizontal current set 0
 
-        bindsym Shift+plus  gaps horizontal all plus 5
+        bindsym Shift+equal  gaps horizontal all plus 5
         bindsym Shift+minus gaps horizontal all minus 5
         bindsym Shift+0     gaps horizontal all set 0
 
-        bindsym Return mode "$mode_gaps"
+        bindsym Return mode $mode_gaps
         bindsym Escape mode "default"
 }
-mode "$mode_gaps_verti" {
-        bindsym plus  gaps vertical current plus 5
+mode $mode_gaps_verti {
+        bindsym equal  gaps vertical current plus 5
         bindsym minus gaps vertical current minus 5
         bindsym 0     gaps vertical current set 0
 
-        bindsym Shift+plus  gaps vertical all plus 5
+        bindsym Shift+equal  gaps vertical all plus 5
         bindsym Shift+minus gaps vertical all minus 5
         bindsym Shift+0     gaps vertical all set 0
 
-        bindsym Return mode "$mode_gaps"
+        bindsym Return mode $mode_gaps
         bindsym Escape mode "default"
 }
-mode "$mode_gaps_top" {
-        bindsym plus  gaps top current plus 5
+mode $mode_gaps_top {
+        bindsym equal  gaps top current plus 5
         bindsym minus gaps top current minus 5
         bindsym 0     gaps top current set 0
 
-        bindsym Shift+plus  gaps top all plus 5
+        bindsym Shift+equal  gaps top all plus 5
         bindsym Shift+minus gaps top all minus 5
         bindsym Shift+0     gaps top all set 0
 
-        bindsym Return mode "$mode_gaps"
+        bindsym Return mode $mode_gaps
         bindsym Escape mode "default"
 }
-mode "$mode_gaps_right" {
-        bindsym plus  gaps right current plus 5
+mode $mode_gaps_right {
+        bindsym equal  gaps right current plus 5
         bindsym minus gaps right current minus 5
         bindsym 0     gaps right current set 0
 
-        bindsym Shift+plus  gaps right all plus 5
+        bindsym Shift+equal  gaps right all plus 5
         bindsym Shift+minus gaps right all minus 5
         bindsym Shift+0     gaps right all set 0
 
-        bindsym Return mode "$mode_gaps"
+        bindsym Return mode $mode_gaps
         bindsym Escape mode "default"
 }
-mode "$mode_gaps_bottom" {
-        bindsym plus  gaps bottom current plus 5
+mode $mode_gaps_bottom {
+        bindsym equal  gaps bottom current plus 5
         bindsym minus gaps bottom current minus 5
         bindsym 0     gaps bottom current set 0
 
-        bindsym Shift+plus  gaps bottom all plus 5
+        bindsym Shift+equal  gaps bottom all plus 5
         bindsym Shift+minus gaps bottom all minus 5
         bindsym Shift+0     gaps bottom all set 0
 
-        bindsym Return mode "$mode_gaps"
+        bindsym Return mode $mode_gaps
         bindsym Escape mode "default"
 }
-mode "$mode_gaps_left" {
-        bindsym plus  gaps left current plus 5
+mode $mode_gaps_left {
+        bindsym equal  gaps left current plus 5
         bindsym minus gaps left current minus 5
         bindsym 0     gaps left current set 0
 
-        bindsym Shift+plus  gaps left all plus 5
+        bindsym Shift+equal  gaps left all plus 5
         bindsym Shift+minus gaps left all minus 5
         bindsym Shift+0     gaps left all set 0
 
-        bindsym Return mode "$mode_gaps"
+        bindsym Return mode $mode_gaps
         bindsym Escape mode "default"
 }
-
