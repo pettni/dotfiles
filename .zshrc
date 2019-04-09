@@ -1,12 +1,17 @@
 export ZSH="/home/petter/.oh-my-zsh"
 export ZSH_THEME="robbyrussell"
 plugins=(
-  command-not-found
+    command-not-found
+    vi-mode
+    pass
 )
 
+bindkey -v # vim keybindings
+
 source $ZSH/oh-my-zsh.sh
-alias emacs="TERM=xterm-color emacs -nw"
-export EDITOR="TERM=xterm-color emacs -nw"
+
+alias emacs="emacs -nw"
+export EDITOR="emacs -nw"
 alias py2env="source ~/.venvs/py2env/bin/activate"
 alias py3env="source ~/.venvs/py3env/bin/activate"
 

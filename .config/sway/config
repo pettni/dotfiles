@@ -4,6 +4,10 @@
 
 # Modifier key
 set $mod Mod4
+set $left h
+set $right l
+set $up k
+set $down j
 
 # Workspaces
 set $ws1 "1:"
@@ -41,7 +45,8 @@ set $font_name_not  pango:SFNS Display 15
 
 # Peripherals
 set $touchpad_name "1739:30383:DLL082A:01_06CB:76AF_Touchpad"
-set $keyboard_name "16700:12317:Dell_Dell_Universal_Receiver"
+set $keyboard1_name "1:1:AT_Translated_Set_2_keyboard"
+set $keyboard2_name "16700:12317:Dell_Dell_Universal_Receiver"
 set $mouse_name "16700:12317:Dell_Dell_Universal_Receiver_Mouse"
 set $laptop_mon "Sharp Corporation 0x1449 0x00000000"
 set $home_mon "Dell Inc. DELL U2518D 0WG2J7AEBHCL"
@@ -56,7 +61,12 @@ input $touchpad_name {
   dwt enabled
 }
 
-input $keyboard_name {
+input $keyboard1_name {
+  xkb_layout us,se
+  xkb_options grp:win_space_toggle
+}
+
+input $keyboard2_name {
   xkb_layout us,se
   xkb_options grp:win_space_toggle
 }
@@ -102,8 +112,8 @@ bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
 
-bindsym Ctrl+$mod+Left workspace prev
-bindsym Ctrl+$mod+Right workspace next
+bindsym Ctrl+$mod+$left workspace prev
+bindsym Ctrl+$mod+$right workspace next
 
 #######################################################
 #                     Applications                    #
@@ -183,10 +193,10 @@ workspace $ws8 output DP-1
 workspace $ws9 output DP-1
 workspace $ws10 output DP-1
 
-bindsym Ctrl+Shift+$mod+Right move workspace to output right
-bindsym Ctrl+Shift+$mod+Left move workspace to output left
-bindsym Ctrl+Shift+$mod+Up move workspace to output up
-bindsym Ctrl+Shift+$mod+Down move workspace to output down
+bindsym Ctrl+Shift+$mod+$right move workspace to output right
+bindsym Ctrl+Shift+$mod+$left move workspace to output left
+bindsym Ctrl+Shift+$mod+$up move workspace to output up
+bindsym Ctrl+Shift+$mod+$down move workspace to output down
 
 exec swayidle -w \
           timeout 300 'swaylock -f -c 000000' \
@@ -216,17 +226,17 @@ bindsym XF86AudioPrev exec playerctl previous
 #                    Focus/Stacking                   #
 #######################################################
 
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
 
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
 
-bindsym $mod+h split h
+bindsym $mod+b split h
 bindsym $mod+v split v
 
 # change container layout (stacked, tabbed, toggle split)
@@ -261,10 +271,10 @@ bindsym $mod+minus scratchpad show
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym $left resize shrink width 10 px or 10 ppt
+        bindsym $up resize grow height 10 px or 10 ppt
+        bindsym $down resize shrink height 10 px or 10 ppt
+        bindsym $right resize grow width 10 px or 10 ppt
 
         bindsym Return mode "default"
         bindsym Escape mode "default"

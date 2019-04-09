@@ -14,7 +14,6 @@
 ;; Autosettings file
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file :noerror)
-
 (setq version-control t
       backup-by-copying t
       delete-old-versions t
@@ -31,6 +30,11 @@
   (package-install 'use-package))
 (require 'use-package)
 
+(use-package evil
+  :ensure t
+  :config
+  (evil-mode 1))
+
 ;; Multiple cursors bindings
 (use-package multiple-cursors
   :ensure t
@@ -43,6 +47,13 @@
 ;; darkroom
 (use-package darkroom
   :ensure t)
+
+;; set theme
+(use-package srcery-theme
+  :ensure t
+  :config
+  (setq srcery-transparent-background t)
+  (load-theme 'srcery t))
 
 ;; Autocompletion
 (use-package auto-complete

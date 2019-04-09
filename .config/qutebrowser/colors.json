@@ -1,0 +1,28 @@
+{
+    "wallpaper": "/home/petter/.config/backgrounds/wintersea.jpg",
+    "alpha": "100",
+
+    "special": {
+        "background": "#2f343f",
+        "foreground": "#cfdbea",
+        "cursor": "#cfdbea"
+    },
+    "colors": {
+        "color0": "#141619",
+        "color1": "#4B74AE",
+        "color2": "#6E86AB",
+        "color3": "#6E9AD1",
+        "color4": "#99A0A8",
+        "color5": "#C3C1B9",
+        "color6": "#93B0D7",
+        "color7": "#cfdbea",
+        "color8": "#9099a3",
+        "color9": "#4B74AE",
+        "color10": "#6E86AB",
+        "color11": "#6E9AD1",
+        "color12": "#99A0A8",
+        "color13": "#C3C1B9",
+        "color14": "#93B0D7",
+        "color15": "#cfdbea"
+    }
+}
