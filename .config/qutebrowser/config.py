@@ -4,7 +4,7 @@ config.bind('<z><p><l>', 'spawn --userscript qute-pass --password-only -U secret
 config.bind('<z><o><l>', 'spawn --userscript qute-pass --otp-only -U secret --username-pattern "login: (.+)"')
 
 c.window.hide_decoration = True
-
+c.completion.height = '30%'
 monospace = 'SFNS Display'
 font_size = 13
 

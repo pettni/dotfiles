@@ -1,2 +1,4 @@
-PATH        OVERRIDE=${PATH}:${HOME}/.local/bin:/usr/local/texlive/2018/bin/x86_64-linux:/snap/bin
-
+PATH				OVERRIDE=${PATH}:${HOME}/.local/bin:/usr/local/texlive/2018/bin/x86_64-linux:/snap/bin
+XDG_CONFIG_DIRS			OVERRIDE=/etc/xdg/xdg-sway:/etc/xdg
+XDG_DATA_DIRS			OVERRIDE=/usr/share/sway:/usr/local/share:/usr/share:/var/lib/snapd/desktop
+_JAVA_AWT_WM_NONREPARENTING	OVERRIDE=1

@@ -30,10 +30,10 @@
   (package-install 'use-package))
 (require 'use-package)
 
-(use-package evil
-  :ensure t
-  :config
-  (evil-mode 1))
+;;(use-package evil
+;;  :ensure t
+;;  :config
+;;  (evil-mode 1))
 
 ;; Multiple cursors bindings
 (use-package multiple-cursors

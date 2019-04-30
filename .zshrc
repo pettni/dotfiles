@@ -2,11 +2,10 @@ export ZSH="/home/petter/.oh-my-zsh"
 export ZSH_THEME="robbyrussell"
 plugins=(
     command-not-found
-    vi-mode
     pass
 )
 
-bindkey -v # vim keybindings
+bindkey -e # emacs keybindings
 
 source $ZSH/oh-my-zsh.sh
 
@@ -38,7 +37,7 @@ export PATH=$PATH:${STANDARD_DIR}/bin:${LINARO_DIR}/bin
 
 # ros
 alias rosenv="source ~/software/catkin_ros/devel_isolated/setup.zsh && source ~/coding/catkin_ws/devel/setup.zsh"
-alias rosremote="rosenv && export ROS_MASTER_URI=http://192.168.0.24:11311 && export ROS_IP=192.168.0.18"
+alias rosremote="rosenv && export ROS_MASTER_URI=http://192.168.0.100:11311 && export ROS_IP=192.168.0.104"
 
 # kitty
 kitty + complete setup zsh | source /dev/stdin

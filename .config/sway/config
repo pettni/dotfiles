@@ -1,4 +1,4 @@
-#######################################################
+#####################################################
 #                       Variables                     #
 #######################################################
 
@@ -114,6 +114,8 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 
 bindsym Ctrl+$mod+$left workspace prev
 bindsym Ctrl+$mod+$right workspace next
+bindsym Ctrl+$mod+Left workspace prev
+bindsym Ctrl+$mod+Right workspace next
 
 #######################################################
 #                     Applications                    #
@@ -178,6 +180,9 @@ bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. 
 # lock screen
 bindsym $mod+Shift+x exec swaylock -f -i $wallpaper -e --font "$font_name_not" --indicator-radius 100 --inside-color "$bg-color" --ring-color "$focus-color" --text-color "$fg-color"
 
+# screenshot
+bindsym --release Print exec grim -g "$(slurp)" ~/screenshot.png
+
 #######################################################
 #                       Outputs                       #
 #######################################################
@@ -197,10 +202,14 @@ bindsym Ctrl+Shift+$mod+$right move workspace to output right
 bindsym Ctrl+Shift+$mod+$left move workspace to output left
 bindsym Ctrl+Shift+$mod+$up move workspace to output up
 bindsym Ctrl+Shift+$mod+$down move workspace to output down
+bindsym Ctrl+Shift+$mod+Right move workspace to output right
+bindsym Ctrl+Shift+$mod+Left move workspace to output left
+bindsym Ctrl+Shift+$mod+Up move workspace to output up
+bindsym Ctrl+Shift+$mod+Down move workspace to output down
 
 exec swayidle -w \
-          timeout 300 'swaylock -f -c 000000' \
-          timeout 600 'swaymsg "output * dpms off"' \
+          timeout 600 'swaylock -f -c 000000' \
+          timeout 1200 'swaymsg "output * dpms off"' \
                resume 'swaymsg "output * dpms on"' \
           before-sleep 'swaylock -f -c 000000'
 
@@ -235,6 +244,16 @@ bindsym $mod+Shift+$left move left
 bindsym $mod+Shift+$down move down
 bindsym $mod+Shift+$up move up
 bindsym $mod+Shift+$right move right
+
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
 
 bindsym $mod+b split h
 bindsym $mod+v split v
