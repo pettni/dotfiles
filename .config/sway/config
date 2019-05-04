@@ -12,24 +12,25 @@ set $down j
 # Workspaces
 set $ws1 "1:"
 set $ws2 "2:"
-set $ws3 "3:"
-set $ws4 "4:"
-set $ws5 "5:"
-set $ws6 "6:"
+set $ws3 "3:"
+set $ws4 "4:"
+set $ws5 "5:"
+set $ws6 6
 set $ws7 7
 set $ws8 8
 set $ws9 9
 set $ws10 "10:"
 
 # Border
-set $border_width    1
+set $border_width    3
 
 # Colors
-set $bg-color		   #2f343f
-set $fg-color              #cfdbea
-set $focus-color           #4B74AE
-set $inactive-text-color   #99A0A8
-set $wallpaper /home/petter/.config/backgrounds/wintersea.jpg
+set $bg      #2f343f
+set $fg      #f8f8f2
+set $fg-dark #44475a
+set $accent  #6272a4
+
+set $wallpaper /home/petter/.config/backgrounds/pollock.jpg
 
 # Gaps
 set $default_gaps_inner 10
@@ -37,11 +38,11 @@ set $default_gaps_outer 0
 
 # Terminal
 set $term $HOME/.local/bin/kitty
-set $menu rofi -show drun
+set $menu rofi -show drun 
 
 # Font
-set $font_name      pango:SFNS Display 11
-set $font_name_not  pango:SFNS Display 15
+set $font_name      pango:Fira Code 10
+set $font_name_not  pango:Fira Code 15
 
 # Peripherals
 set $touchpad_name "1739:30383:DLL082A:01_06CB:76AF_Touchpad"
@@ -122,8 +123,10 @@ bindsym Ctrl+$mod+Right workspace next
 #######################################################
 
 assign [class="Thunderbird"] workspace $ws1
+assign [class="Signal"] workspace $ws1
+assign [class="Skype"] workspace $ws1
 assign [class="Joplin"] workspace $ws2
-assign [class="Mendeley Desktop"] workspace $ws5
+assign [class="Mendeley Desktop"] workspace $ws3
 assign [class="Spotify"] workspace $ws10
 
 for_window [app_id="thunar"] floating enable
@@ -131,12 +134,12 @@ for_window [app_id="pavucontrol"] floating enable
 for_window [app_id="gnome-calculator"] floating enable
 for_window [app_id="gnome-font-viewer"] floating enable
 
+for_window [app_id="matlab"] floating enable
 for_window [class="Gpick"] floating enable
 for_window [class="Lxappearance"] floating enable
-for_window [class="Signal"] floating enable
-for_window [class="Skype"] floating enable
 
-for_window [app_id="sublime"] opacity 0.95
+for_window [app_id="sublime"] opacity 0.97
+for_window [app_id="zathura"] opacity 0.97
 
 # gtk theme
 exec_always ~/.config/sway/import-gsettings \
@@ -153,7 +156,7 @@ exec /usr/lib/geoclue-2.0/demos/agent
 exec redshift
 exec dropbox start
 exec libinput-gestures-setup restart
-exec ~/software/mako/build/mako --font "$font_name_not" --background-color "$bg-color" --text-color "$fg-color" --border-color "$focus-color" --border-size 2 --icons 1 --default-timeout 4000 --max-visible 4
+exec ~/software/mako/build/mako --font "$font_name_not" --background-color "$bg" --text-color "$fg" --border-color "$accent" --border-size 2 --icons 1 --default-timeout 4000 --max-visible 4
 
 # applications
 exec unclutter
@@ -178,7 +181,7 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 
 # lock screen
-bindsym $mod+Shift+x exec swaylock -f -i $wallpaper -e --font "$font_name_not" --indicator-radius 100 --inside-color "$bg-color" --ring-color "$focus-color" --text-color "$fg-color"
+bindsym $mod+Shift+x exec swaylock -f -i $wallpaper -e --font "$font_name_not" --indicator-radius 100 --inside-color "$bg" --ring-color "$accent" --text-color "$fg"
 
 # screenshot
 bindsym --release Print exec grim -g "$(slurp)" ~/screenshot.png
@@ -189,7 +192,7 @@ bindsym --release Print exec grim -g "$(slurp)" ~/screenshot.png
 
 workspace $ws1 output eDP-1
 workspace $ws2 output eDP-1
-workspace $ws3 output DP-1
+workspace $ws3 output eDP-1
 workspace $ws4 output DP-1
 workspace $ws5 output DP-1
 workspace $ws6 output DP-1
@@ -264,13 +267,13 @@ bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+f floating toggle
 
 # drag floating
 floating_modifier $mod normal
 
 # change focus between tiling / floating windows
-bindsym $mod+Shift+Ctrl+space focus mode_toggle
+bindsym $mod+Shift+Ctrl+focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
@@ -306,11 +309,11 @@ bindsym $mod+r mode "resize"
 #                      Colors                         #
 #######################################################
 
-#                       border             background         text                 indicator     child_border
-client.focused          $fg-color          $bg-color          $focus-color 	   $bg-color     $fg-color
-client.focused_inactive $bg-color          $bg-color          $inactive-text-color $bg-color     $bg-color
-client.unfocused        $bg-color          $bg-color          $inactive-text-color $bg-color     $bg-color
-client.urgent           $focus-color       $focus-color       $inactive-text-color $focus-color  $bg-color
+#                       border   bg      text indicator  child_border
+client.focused          $accent  $bg     $fg  $bg        $accent
+client.focused_inactive $bg      $bg     $fg  $bg        $bg
+client.unfocused        $bg      $bg     $fg  $bg        $bg
+client.urgent           $accent  $accent $fg  $accent    $bg
 
 hide_edge_borders both
 
@@ -324,14 +327,14 @@ bar {
   tray_output none
   status_command i3status
   colors {
-    background $bg-color
-    separator  $focus-color
-    statusline $inactive-text-color
-    #                  border             background        text
-    focused_workspace  $bg-color          $bg-color     $focus-color
-    active_workspace   $bg-color          $bg-color     $focus-color    
-    inactive_workspace $bg-color          $bg-color     $inactive-text-color
-    urgent_workspace   $focus-color       $focus-color  $inactive-text-color     
+    background $bg
+    separator  $accent
+    statusline $fg
+    #                  border       background   text
+    focused_workspace  $bg          $bg          $accent
+    active_workspace   $bg          $bg          $accent    
+    inactive_workspace $bg          $bg          $fg-dark
+    urgent_workspace   $accent      $bg          $accent
   }
 }
 
@@ -342,7 +345,12 @@ bar {
 gaps inner $default_gaps_inner
 gaps outer $default_gaps_outer
 
-smart_gaps on  # (off/on/inverse_outer) no gaps for single app
+workspace $ws1 gaps inner 0
+workspace $ws2 gaps inner 0
+workspace $ws3 gaps inner 0
+workspace $ws4 gaps horizontal 400
+
+smart_gaps off
 smart_borders on
 
 set $mode_gaps "Gaps: (o)uter, (i)nner, (h)orizontal, (v)ertical, (t)op, (r)ight, (b)ottom, (l)eft"

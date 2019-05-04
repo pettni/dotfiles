@@ -1,15 +1,18 @@
-rofi.lines: 5
+rofi.lines: 8
 rofi.eh: 2
-rofi.padding: 300
-rofi.fullscreen: true
-rofi.bw: 0
+rofi.padding: 100
+rofi.fullscreen: false
+rofi.bw: 4
 rofi.separator-style: none
 rofi.hide-scrollbar: true
- 
 rofi.color-enabled: true
-rofi.color-window: argb:cc2f343f, argb:cc2f343f, argb:cc2f343f
-rofi.color-normal: argb:002f343f, #d8dee8, argb:002f343f, argb:002f343f, #bf616a
-rofi.color-active: #2f343f, #b48ead, #2f343f, #2f343f, #93e5cc
-rofi.color-urgent: #2f343f, #ebcb8b, #2f343f, #2f343f, #ebcb8b
 
-rofi.font: System San Francisco Display 18
+# window colors    bg             border         separator
+rofi.color-window: argb:f52f343f, argb:ff6272a4, argb:ff00ff00
+
+# menu colors      bg             fg       bg-alt         bg-hl          fg-hl
+rofi.color-normal: argb:002f343f, #f8f8f2, argb:002f343f, argb:002f343f, #6272a4
+rofi.color-active: #2f343f,       #b48ead, #2f343f,       #2f343f,       #93e5cc
+rofi.color-urgent: #2f343f,       #ebcb8b, #2f343f,       #2f343f,       #ebcb8b
+
+rofi.font: Fira Code Medium 20

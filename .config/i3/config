@@ -12,10 +12,10 @@ set $down j
 # Workspaces
 set $ws1 "1:"
 set $ws2 "2:"
-set $ws3 "3:"
-set $ws4 "4:"
-set $ws5 "5:"
-set $ws6 "6:"
+set $ws3 "3:"
+set $ws4 "4:"
+set $ws5 "5:"
+set $ws6 6
 set $ws7 7
 set $ws8 8
 set $ws9 9
@@ -84,7 +84,7 @@ bindsym Ctrl+$mod+Right workspace next
 
 workspace $ws1 output eDP1
 workspace $ws2 output eDP1
-workspace $ws3 output DP1
+workspace $ws3 output eDP1
 workspace $ws4 output DP1
 workspace $ws5 output DP1
 workspace $ws6 output DP1
@@ -117,9 +117,9 @@ exec --no-startup-id thunderbird
 exec --no-startup-id ~/.joplin/Joplin.AppImage
 exec --no-startup-id mendeleydesktop
 
-assign [class="Joplin"] workspace $ws2
 assign [class="Thunderbird"] workspace $ws1
-assign [class="Mendeley Desktop"] workspace $ws5
+assign [class="Joplin"] workspace $ws2
+assign [class="Mendeley Desktop"] workspace $ws3
 assign [class="Spotify"] workspace $ws10
 
 for_window [class="Thunar"] floating enable
@@ -167,7 +167,7 @@ default_border pixel $border_width
 # default_border normal
 
 # gestures and scrolling/tapping
-exec --no-startup-id libinput-gestures
+exec --no-startup-id libinput-gestures -c ~/.config/i3/libinput-gestures.conf
 exec --no-startup-id xinput set-prop $touchpad_name "libinput Tapping Enabled" 1
 exec --no-startup-id xinput set-prop $touchpad_name "libinput Natural Scrolling Enabled" 1
 

@@ -13,7 +13,7 @@ alias emacs="emacs -nw"
 export EDITOR="emacs -nw"
 alias py2env="source ~/.venvs/py2env/bin/activate"
 alias py3env="source ~/.venvs/py3env/bin/activate"
-
+alias get_ip="ifconfig wlp58s0 | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'"
 # mosek
 export MOSEKLM_LICENSE_FILE=~/software/mosek/mosek.lic
 
@@ -37,13 +37,14 @@ export PATH=$PATH:${STANDARD_DIR}/bin:${LINARO_DIR}/bin
 
 # ros
 alias rosenv="source ~/software/catkin_ros/devel_isolated/setup.zsh && source ~/coding/catkin_ws/devel/setup.zsh"
-alias rosremote="rosenv && export ROS_MASTER_URI=http://192.168.0.100:11311 && export ROS_IP=192.168.0.104"
+alias rosremote="rosenv && export ROS_MASTER_URI=http://192.168.0.100:11311 && export ROS_IP=`get_ip`"
 
 # kitty
 kitty + complete setup zsh | source /dev/stdin
 alias ssh="kitty +kitten ssh"
 alias dark="kitty @ set-colors --all -c ~/.config/kitty/kitty-dark.conf"
 alias light="kitty @ set-colors --all -c ~/.config/kitty/kitty-light.conf"
+alias icat="kitty +kitten icat"
 
 # jekyll
 export GEM_HOME=$HOME/coding/gems

@@ -23,23 +23,37 @@
 ;; Packages
 (require 'package)
 (add-to-list 'package-archives
-	     '("melpa" . "http://melpa.org/packages/") t)
+       '("melpa" . "http://melpa.org/packages/") t)
 (package-initialize)
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
 (require 'use-package)
 
-;;(use-package evil
-;;  :ensure t
-;;  :config
-;;  (evil-mode 1))
+;; helm
+(use-package helm
+  :ensure t
+  :bind (("M-x" . helm-M-x)
+        ("M-y" . helm-show-kill-ring))
+  :config (progn
+            (setq helm-display-header-line nil)
+            (setq helm-mode-line-string nil)
+            (setq helm-buffer-fuzzy-matching t)
+            (setq helm-M-x-fuzzy-match t)
+            (setq helm-recentf-fuzzy-match t)
+            (require 'helm-config)
+            (helm-mode 1)))
 
 ;; Multiple cursors bindings
 (use-package multiple-cursors
   :ensure t
   :bind (("C-c m c" . 'mc/edit-lines)
-	 ("C-M-d" . 'mc/mark-next-like-this-word)))
+   ("C-M-d" . 'mc/mark-next-like-this-word)))
+
+(use-package hl-line
+  :ensure t
+  :config
+  (global-hl-line-mode 0))
 
 ;; mouse scrolling
 (mouse-wheel-mode t)
@@ -47,13 +61,6 @@
 ;; darkroom
 (use-package darkroom
   :ensure t)
-
-;; set theme
-(use-package srcery-theme
-  :ensure t
-  :config
-  (setq srcery-transparent-background t)
-  (load-theme 'srcery t))
 
 ;; Autocompletion
 (use-package auto-complete
@@ -74,11 +81,17 @@
 (use-package autopair
   :ensure t
   :config
-  (autopair-global-mode 1))
+  (add-hook 'prog-mode-hook 'autopair-mode)
+)
+
+(use-package rainbow-delimiters
+  :ensure t
+  :config
+  (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
 ;; Tabs
-(setq tab-width 2
-      indent-tabs-mode nil)
+(setq-default tab-width 2
+              indent-tabs-mode nil)
 
 ;; Configure options
 (setq suggest-key-bindings t)
@@ -89,7 +102,6 @@
 (use-package tex-site
   :ensure auctex
   :config
-
   (use-package latex
     :config
     (add-hook `latex-mode-hook 'flyspell-mode)
@@ -98,10 +110,28 @@
     (add-hook `LaTeX-mode-hook 'LaTeX-math-mode)
     (add-hook `LaTeX-mode-hook 'turn-on-reftex)
     (add-hook `LaTeX-mode-hook 'tex-pdf-mode)    
-    ;;(add-hook `LaTeX-mode-hook '(TeX-source-correlate-method (quote synctex)))
     (add-hook `LaTeX-mode-hook 'TeX-source-correlate-mode t)
-    (add-hook `LaTeX-mode-hook 'TeX-source-correlate-start-server t)
-    ;;(add-hook 'LaTeX-mode-hook '(TeX-view-program-list (quote (("Okular" "okular --unique %o#src:%n%b")))))
-    ;;(add-hook 'Latex-mode-hook  '(TeX-view-program-selection (quote ((engine-omega "dvips and gv") (output-dvi "xdvi") (output-pdf "Okular") (output-html "xdg-open")))))
-    ))
-(setq TeX-view-program-selection '((output-pdf "Okular")))
+    (add-hook `LaTeX-mode-hook 'TeX-source-correlate-start-server t))
+    (setq TeX-view-program-selection '((output-pdf "Okular"))))
+
+;; THEMING ;;
+(use-package dracula-theme
+  :ensure t
+  :config
+  (load-theme 'dracula t))
+
+(use-package doom-modeline
+  :ensure t
+  :hook
+  (after-init . doom-modeline-mode)
+  :config
+  (setq doom-modeline-icon nil)
+  (setq doom-modeline-major-mode-icon nil)
+  (setq doom-modeline-major-mode-color-icon nil))
+
+;; disable background after init
+(defun on-after-init ()
+  (unless (display-graphic-p (selected-frame))
+    (set-face-background 'default "unspecified-bg" (selected-frame))))
+
+(add-hook 'window-setup-hook 'on-after-init)
