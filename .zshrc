@@ -42,8 +42,8 @@ alias rosremote="rosenv && export ROS_MASTER_URI=http://192.168.0.100:11311 && e
 # kitty
 kitty + complete setup zsh | source /dev/stdin
 alias ssh="kitty +kitten ssh"
-alias dark="kitty @ set-colors --all -c ~/.config/kitty/kitty-dark.conf"
-alias light="kitty @ set-colors --all -c ~/.config/kitty/kitty-light.conf"
+alias dark="chc dark"
+alias light="chc light"
 alias icat="kitty +kitten icat"
 
 # jekyll

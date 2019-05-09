@@ -8,7 +8,7 @@ rofi.hide-scrollbar: true
 rofi.color-enabled: true
 
 # window colors    bg             border         separator
-rofi.color-window: argb:f52f343f, argb:ff6272a4, argb:ff00ff00
+rofi.color-window: argb:f52f343f, argb:ff6272a4, argb:ff6272a4
 
 # menu colors      bg             fg       bg-alt         bg-hl          fg-hl
 rofi.color-normal: argb:002f343f, #f8f8f2, argb:002f343f, argb:002f343f, #6272a4

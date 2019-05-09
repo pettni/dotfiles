@@ -25,12 +25,12 @@ set $ws10 "10:"
 set $border_width    3
 
 # Colors
-set $bg      #2f343f
-set $fg      #f8f8f2
+set $bg #2f343f
+set $fg #f8f8f2
 set $fg-dark #44475a
-set $accent  #6272a4
+set $accent #6272a4
 
-set $wallpaper /home/petter/.config/backgrounds/pollock.jpg
+set $wallpaper ~/.config/backgrounds/rainier.jpg
 
 # Gaps
 set $default_gaps_inner 10
@@ -48,6 +48,7 @@ set $font_name_not  pango:Fira Code 15
 set $touchpad_name "1739:30383:DLL082A:01_06CB:76AF_Touchpad"
 set $keyboard1_name "1:1:AT_Translated_Set_2_keyboard"
 set $keyboard2_name "16700:12317:Dell_Dell_Universal_Receiver"
+set $keyboard3_name "16700:8468:Dell_WK717Keyboard"
 set $mouse_name "16700:12317:Dell_Dell_Universal_Receiver_Mouse"
 set $laptop_mon "Sharp Corporation 0x1449 0x00000000"
 set $home_mon "Dell Inc. DELL U2518D 0WG2J7AEBHCL"
@@ -68,6 +69,11 @@ input $keyboard1_name {
 }
 
 input $keyboard2_name {
+  xkb_layout us,se
+  xkb_options grp:win_space_toggle
+}
+
+input $keyboard3_name {
   xkb_layout us,se
   xkb_options grp:win_space_toggle
 }
@@ -273,7 +279,7 @@ bindsym $mod+Shift+f floating toggle
 floating_modifier $mod normal
 
 # change focus between tiling / floating windows
-bindsym $mod+Shift+Ctrl+focus mode_toggle
+bindsym $mod+Shift+Ctrl+f focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent

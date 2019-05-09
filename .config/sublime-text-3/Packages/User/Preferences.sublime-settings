@@ -9,6 +9,5 @@
 	"spell_check": true,
 	"tab_size": 2,
 	"theme": "Adaptive.sublime-theme",
-	"translate_tab_to_spaces": true,
-	"vintage_start_in_command_mode": true
+	"translate_tab_to_spaces": true
 }

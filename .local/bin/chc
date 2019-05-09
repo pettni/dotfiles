@@ -1,0 +1,83 @@
+#!/bin/bash
+
+dfn=0
+
+if [ $1 == 'dark' ]
+then
+  background="~/.config/backgrounds/rainier.jpg"
+  subl_cscheme="Packages/User/myDracula.tmTheme"
+  subl_theme="Adaptive.sublime-theme"
+  kitty_colors="colors-dracula.conf"
+  emacs="dracula"
+  gtk="Arc-Darker"
+  fg=f8f8f2
+  bg=2f343f
+  dfg=44475a
+  acc=6272a4
+  dfn=1
+elif [ $1 == 'light' ]
+then
+  background="~/.config/backgrounds/pollock.jpg"
+  subl_cscheme="Packages/ayu/ayu-light.sublime-color-scheme"
+  subl_theme="ayu-light.sublime-theme"
+  kitty_colors="colors-ayu.conf"
+  emacs="leuven"
+  gtk="Arc"
+  fg=6c7680
+  bg=fafafa
+  dfg=959DA6
+  acc=ff9940
+  dfn=1
+fi
+
+if [ $dfn == 1 ]
+then
+
+  # gtk
+  sed -i 's|gtk-theme-name=.*$|gtk-theme-name="'"$gtk"'"|g' ~/.gtkrc-2.0
+  sed -i 's|gtk-theme-name=.*$|gtk-theme-name='"$gtk"'|g' ~/.config/gtk-3.0/settings.ini
+
+  # sway
+  sed -i 's|set \$bg .*$|set \$bg '"#$bg"'|g' ~/.config/sway/config
+  sed -i 's|set \$fg .*$|set \$fg '"#$fg"'|g' ~/.config/sway/config
+  sed -i 's|set \$fg-dark .*$|set \$fg-dark '"#$dfg"'|g' ~/.config/sway/config
+  sed -i 's|set \$accent .*$|set \$accent '"#$acc"'|g' ~/.config/sway/config
+
+  sed -i 's|set \$wallpaper .*$|set \$wallpaper '"$background"'|g' ~/.config/sway/config  
+
+  # rofi
+  sed -i 's|rofi\.color-window: .*$|rofi\.color-window: argb:f5'"$bg"', argb:ff'"$acc"', argb:ff'"$acc"'|g' ~/.config/rofi/config
+  sed -i 's|rofi\.color-normal: .*$|rofi\.color-normal: argb:00'"$bg"', '"#$fg"', argb:00'"$bg"', argb:00'"$bg"', '"#$acc"'|g' ~/.config/rofi/config
+
+  # zathura
+  sed -i 's|set default-bg .*$|set default-bg "'"#$bg"'"|g' ~/.config/zathura/zathurarc
+  sed -i 's|set recolor-darkcolor .*$|set recolor-darkcolor "'"#$fg"'"|g' ~/.config/zathura/zathurarc
+  sed -i 's|set recolor-lightcolor .*$|set recolor-lightcolor "'"#$bg"'"|g' ~/.config/zathura/zathurarc
+
+  if [ $1 == 'dark' ]
+  then
+    sed -i 's|set recolor false$|set recolor true|g' ~/.config/zathura/zathurarc
+  else 
+    sed -i 's|set recolor true$|set recolor false|g' ~/.config/zathura/zathurarc
+  fi
+
+  # kitty
+  sed -i 's/background .*$/background '"#$bg"'/g' ~/.config/kitty/colors.conf
+  sed -i 's/foreground .*$/foreground '"#$fg"'/g' ~/.config/kitty/colors.conf
+  sed -i 's/include.*$/include '"$kitty_colors"'/g' ~/.config/kitty/colors.conf
+
+  # sublime
+  sed -i 's|"color_scheme": .*,$|"color_scheme": "'"$subl_cscheme"'",|g' ~/.config/sublime-text-3/Packages/User/Preferences.sublime-settings
+  sed -i 's|"theme": .*,$|"theme": "'"$subl_theme"'",|g' ~/.config/sublime-text-3/Packages/User/Preferences.sublime-settings
+
+  # emacs
+  sed -i 's|(load-theme .* t)$|(load-theme '"'$emacs"' t)|g' ~/.emacs
+
+  # reload stuff
+  kitty @ set-colors --all -c ~/.config/kitty/colors.conf
+  swaymsg reload
+
+  # gtk
+  gsettings set org.gnome.desktop.interface gtk-theme $gtk
+  gsettings set org.gnome.desktop.wm.preferences theme $gtk  
+fi

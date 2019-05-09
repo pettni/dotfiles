@@ -116,9 +116,11 @@
 
 ;; THEMING ;;
 (use-package dracula-theme
-  :ensure t
-  :config
-  (load-theme 'dracula t))
+  :ensure t)
+(use-package leuven-theme
+  :ensure t)
+
+(load-theme 'dracula t)
 
 (use-package doom-modeline
   :ensure t
