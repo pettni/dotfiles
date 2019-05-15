@@ -41,17 +41,19 @@ set $term $HOME/.local/bin/kitty
 set $menu rofi -show drun 
 
 # Font
-set $font_name      pango:Fira Code 10
-set $font_name_not  pango:Fira Code 15
+set $font_name   pango:Fira Code
+set $font_sz     10
+set $font_sz_not 15
+set $font_sz_bar 10
 
-# Peripherals
+# Peripherals (swaymsg -t get_inputs, swaymsg -t get_outputs)
 set $touchpad_name "1739:30383:DLL082A:01_06CB:76AF_Touchpad"
 set $keyboard1_name "1:1:AT_Translated_Set_2_keyboard"
 set $keyboard2_name "16700:12317:Dell_Dell_Universal_Receiver"
 set $keyboard3_name "16700:8468:Dell_WK717Keyboard"
 set $mouse_name "16700:12317:Dell_Dell_Universal_Receiver_Mouse"
-set $laptop_mon "Sharp Corporation 0x1449 0x00000000"
-set $home_mon "Dell Inc. DELL U2518D 0WG2J7AEBHCL"
+set $laptop_mon eDP-1
+set $home_mon DP-1
 
 #######################################################
 #                   Peripherals                       #
@@ -87,7 +89,9 @@ output $home_mon resolution 2560x1440 position 1920,0
 
 output * bg $wallpaper fill
 
-font $font_name
+seat seat0 hide_cursor 5000
+
+font $font_name $font_sz
 
 default_border pixel $border_width
 
@@ -162,10 +166,11 @@ exec /usr/lib/geoclue-2.0/demos/agent
 exec redshift
 exec dropbox start
 exec libinput-gestures-setup restart
-exec ~/software/mako/build/mako --font "$font_name_not" --background-color "$bg" --text-color "$fg" --border-color "$accent" --border-size 2 --icons 1 --default-timeout 4000 --max-visible 4
+exec ~/software/mako/build/mako --font "$font_name $font_sz_not" --background-color "$bg" --text-color "$fg" --border-color "$accent" --border-size 2 --icons 1 --default-timeout 4000 --max-visible 4
+
+exec ~/.config/xob/pulse-volume-watcher.py | xob -s volume
 
 # applications
-exec unclutter
 exec thunderbird
 exec ~/.joplin/Joplin.AppImage
 exec mendeleydesktop
@@ -192,20 +197,24 @@ bindsym $mod+Shift+x exec swaylock -f -i $wallpaper -e --font "$font_name_not" -
 # screenshot
 bindsym --release Print exec grim -g "$(slurp)" ~/screenshot.png
 
+# disable laptop output on lid close
+bindswitch lid:on exec swaymsg output $laptop_mon disable
+bindswitch lid:off exec swaymsg output $laptop_mon enable
+
 #######################################################
 #                       Outputs                       #
 #######################################################
 
-workspace $ws1 output eDP-1
-workspace $ws2 output eDP-1
-workspace $ws3 output eDP-1
-workspace $ws4 output DP-1
-workspace $ws5 output DP-1
-workspace $ws6 output DP-1
-workspace $ws7 output DP-1
-workspace $ws8 output DP-1
-workspace $ws9 output DP-1
-workspace $ws10 output DP-1
+workspace $ws1 output $laptop_mon
+workspace $ws2 output $laptop_mon
+workspace $ws3 output $laptop_mon
+workspace $ws4 output $home_mon
+workspace $ws5 output $home_mon
+workspace $ws6 output $home_mon
+workspace $ws7 output $home_mon
+workspace $ws8 output $home_mon
+workspace $ws9 output $home_mon
+workspace $ws10 output $home_mon
 
 bindsym Ctrl+Shift+$mod+$right move workspace to output right
 bindsym Ctrl+Shift+$mod+$left move workspace to output left
@@ -332,6 +341,9 @@ bar {
   strip_workspace_numbers yes  
   tray_output none
   status_command i3status
+  font $font_name $font_sz_bar
+  gaps 0
+  mode hide
   colors {
     background $bg
     separator  $accent

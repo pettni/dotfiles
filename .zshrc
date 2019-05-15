@@ -21,7 +21,7 @@ export MOSEKLM_LICENSE_FILE=~/software/mosek/mosek.lic
 export GUROBI_HOME=$HOME/software/gurobi811/linux64
 export GRB_LICENSE_FILE=$HOME/software/gurobi811/gurobi.lic
 export PATH=${PATH}:${GUROBI_HOME}/bin
-export LD_LIBRARY_PATH=${GUROBI_HOME}/lib
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${GUROBI_HOME}/lib
 
 # erika/jailhouse
 export LINARO_DIR=/opt/gcc-linaro-7.3.1-2018.05-x86_64_aarch64-elf
