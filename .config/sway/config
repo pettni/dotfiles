@@ -1,4 +1,4 @@
-#####################################################
+#######################################################
 #                       Variables                     #
 #######################################################
 
@@ -52,8 +52,8 @@ set $keyboard1_name "1:1:AT_Translated_Set_2_keyboard"
 set $keyboard2_name "16700:12317:Dell_Dell_Universal_Receiver"
 set $keyboard3_name "16700:8468:Dell_WK717Keyboard"
 set $mouse_name "16700:12317:Dell_Dell_Universal_Receiver_Mouse"
-set $laptop_mon eDP-1
-set $home_mon DP-1
+set $laptop_mon "eDP-1"
+set $home_mon "DP-1"
 
 #######################################################
 #                   Peripherals                       #

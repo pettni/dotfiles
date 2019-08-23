@@ -8,6 +8,3 @@ addpath ~/coding/quadrotor/lib/sfunctions
 addpath ~/coding/quadrotor/lib/udp
 
 addpath('/home/petter/coding/catkin_ws/src/matlab_gen/msggen')
-
-mptopt('lpsolver', 'mosek');
-mptopt('qpsolver', 'mosek');

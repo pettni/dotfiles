@@ -19,7 +19,7 @@ set font "Fira Code 10"
 # colors
 set default-bg "#2f343f"
 
-set highlight-transparency 0.1
+set highlight-transparency 0.05
 
 set recolor-darkcolor "#f8f8f2"
 set recolor-lightcolor "#2f343f"

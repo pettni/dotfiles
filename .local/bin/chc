@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# cool site: https://colorkitty.com/
+
 dfn=0
 
 if [ $1 == 'dark' ]

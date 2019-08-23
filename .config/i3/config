@@ -229,7 +229,7 @@ bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+Shift+space exec ~/.config/i3/float.sh
+bindsym $mod+Shift+f exec ~/.config/i3/float.sh
 
 # change focus between tiling / floating windows
 bindsym $mod+Shift+Ctrl+space focus mode_toggle
