@@ -1,0 +1,26 @@
+{
+    "python.venvPath": "~/.venvs/",
+    "window.zoomLevel": 0,
+    "editor.multiCursorModifier": "ctrlCmd",
+    "editor.fontFamily": "'Fira Code'",
+    "editor.fontLigatures": true,
+    "editor.minimap.enabled": false,
+    "editor.fontSize": 15,
+    "workbench.colorTheme": "Dracula",
+    "editor.fontWeight": "500",
+    "breadcrumbs.enabled": false,
+    "workbench.activityBar.visible": false,
+    "git.autofetch": true,
+    "files.exclude": {
+        ".noseids": true,
+        ".vscode": true,
+        "*-workspace": true,
+        "*.sublime-project": true,
+        "**/__pycache__": true,
+        "**/*.egg-info": true,
+        "**/*.pyc": true
+    },
+    "window.menuBarVisibility": "toggle",
+    "C_Cpp.updateChannel": "Insiders",
+    "python.dataScience.sendSelectionToInteractiveWindow": false,
+}

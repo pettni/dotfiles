@@ -3,6 +3,9 @@ export ZSH_THEME="robbyrussell"
 plugins=(
     command-not-found
     pass
+    sublime
+    colored-man-pages
+    colorize
 )
 
 bindkey -e # emacs keybindings
@@ -77,3 +80,7 @@ c_end=`tput sgr0`
 alias colorline="sed 's/\-\s\[\s\]\s//g;s/@due(\([0-9]\+-[0-9]\+-[0-9]\+\))\s\(.*\)/${c_date}\1${c_end} ${c_text}\2${c_end}/g'"
 alias reorder="sed -e 's/[[:graph:]]*\/\([[:alnum:]]*\)\.md:\(.*\)/\2 \1/g'"
 alias agenda="grep '@due' $MARKDO_ROOT/* | grep '\[\s\]' | colorline | reorder | sort -r | tail -n 10 | for_each_line print_line"
+alias agenda-all="grep '@due' $MARKDO_ROOT/* | grep '\[\s\]' | colorline | reorder | sort -r | for_each_line print_line"
+
+# syntax highlighting
+source ~/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

@@ -9,6 +9,7 @@ then
   background="~/.config/backgrounds/rainier.jpg"
   subl_cscheme="Packages/User/myDracula.tmTheme"
   subl_theme="Adaptive.sublime-theme"
+  code_theme="Dracula"
   kitty_colors="colors-dracula.conf"
   emacs="dracula"
   gtk="Arc-Darker"
@@ -22,6 +23,7 @@ then
   background="~/.config/backgrounds/pollock.jpg"
   subl_cscheme="Packages/ayu/ayu-light.sublime-color-scheme"
   subl_theme="ayu-light.sublime-theme"
+  code_theme="Ayu Light"
   kitty_colors="colors-ayu.conf"
   emacs="leuven"
   gtk="Arc"
@@ -72,6 +74,9 @@ then
   sed -i 's|"color_scheme": .*,$|"color_scheme": "'"$subl_cscheme"'",|g' ~/.config/sublime-text-3/Packages/User/Preferences.sublime-settings
   sed -i 's|"theme": .*,$|"theme": "'"$subl_theme"'",|g' ~/.config/sublime-text-3/Packages/User/Preferences.sublime-settings
 
+  # VSCode
+  sed -i 's|"workbench.colorTheme": .*,$|"workbench.colorTheme": "'"$code_theme"'",|g' ~/.config/Code/User/settings.json
+  
   # emacs
   sed -i 's|(load-theme .* t)$|(load-theme '"'$emacs"' t)|g' ~/.emacs
 

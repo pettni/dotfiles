@@ -10,3 +10,6 @@
 [submodule ".config/i3/notify-send"]
 	path = .config/i3/notify-send
 	url = https://github.com/vlevit/notify-send.sh.git
+[submodule ".zsh-syntax-highlighting"]
+	path = .zsh-syntax-highlighting
+	url = https://github.com/zsh-users/zsh-syntax-highlighting.git

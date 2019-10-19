@@ -51,6 +51,9 @@ set $touchpad_name "1739:30383:DLL082A:01_06CB:76AF_Touchpad"
 set $keyboard1_name "1:1:AT_Translated_Set_2_keyboard"
 set $keyboard2_name "16700:12317:Dell_Dell_Universal_Receiver"
 set $keyboard3_name "16700:8468:Dell_WK717Keyboard"
+set $keyboard4_name "2131:308:LEOPOLD_Mini_Keyboard"
+set $keyboard5_name "1452:597:selin_merdan’s_Keyboard"
+
 set $mouse_name "16700:12317:Dell_Dell_Universal_Receiver_Mouse"
 set $laptop_mon "eDP-1"
 set $home_mon "DP-1"
@@ -78,6 +81,16 @@ input $keyboard2_name {
 input $keyboard3_name {
   xkb_layout us,se
   xkb_options grp:win_space_toggle
+}
+
+input $keyboard4_name {
+  xkb_layout us,se
+  xkb_options grp:win_space_toggle
+}
+
+input $keyboard5_name {
+  xkb_layout us,se
+  xkb_options altwin:swap_lalt_lwin,grp:win_space_toggle
 }
 
 input $mouse_name {
@@ -148,8 +161,8 @@ for_window [app_id="matlab"] floating enable
 for_window [class="Gpick"] floating enable
 for_window [class="Lxappearance"] floating enable
 
-for_window [app_id="sublime"] opacity 0.97
-for_window [app_id="zathura"] opacity 0.97
+for_window [app_id="sublime"] opacity 1
+for_window [app_id="zathura"] opacity 1
 
 # gtk theme
 exec_always ~/.config/sway/import-gsettings \
@@ -199,7 +212,7 @@ bindsym --release Print exec grim -g "$(slurp)" ~/screenshot.png
 
 # disable laptop output on lid close
 bindswitch lid:on exec swaymsg output $laptop_mon disable
-bindswitch lid:off exec swaymsg output $laptop_mon enable
+bindswitch --reload lid:off exec swaymsg output $laptop_mon enable
 
 #######################################################
 #                       Outputs                       #
@@ -366,7 +379,7 @@ gaps outer $default_gaps_outer
 workspace $ws1 gaps inner 0
 workspace $ws2 gaps inner 0
 workspace $ws3 gaps inner 0
-workspace $ws4 gaps horizontal 400
+workspace $ws4 gaps horizontal 250
 
 smart_gaps off
 smart_borders on
