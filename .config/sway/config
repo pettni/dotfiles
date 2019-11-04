@@ -149,7 +149,7 @@ assign [class="Thunderbird"] workspace $ws1
 assign [class="Signal"] workspace $ws1
 assign [class="Skype"] workspace $ws1
 assign [class="Joplin"] workspace $ws2
-assign [class="Mendeley Desktop"] workspace $ws3
+assign [class="Zotero"] workspace $ws3
 assign [class="Spotify"] workspace $ws10
 
 for_window [app_id="thunar"] floating enable
@@ -186,7 +186,7 @@ exec ~/.config/xob/pulse-volume-watcher.py | xob -s volume
 # applications
 exec thunderbird
 exec ~/.joplin/Joplin.AppImage
-exec mendeleydesktop
+exec /opt/zotero/zotero
 
 #######################################################
 #                  sway Keybindings                   #
