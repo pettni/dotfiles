@@ -338,7 +338,7 @@ bindsym $mod+r mode "resize"
 #######################################################
 
 #                       border   bg      text indicator  child_border
-client.focused          $accent  $bg     $fg  $bg        $accent
+client.focused          $accent  $bg     $fg  $accent    $accent
 client.focused_inactive $bg      $bg     $fg  $bg        $bg
 client.unfocused        $bg      $bg     $fg  $bg        $bg
 client.urgent           $accent  $accent $fg  $accent    $bg
