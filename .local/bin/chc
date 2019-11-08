@@ -6,7 +6,7 @@ dfn=0
 
 if [ $1 == 'dark' ]
 then
-  background="~/.config/backgrounds/rainier.jpg"
+  background="$HOME/.config/backgrounds/rainier.jpg"
   subl_cscheme="Packages/User/myDracula.tmTheme"
   subl_theme="Adaptive.sublime-theme"
   code_theme="Dracula"
@@ -20,7 +20,7 @@ then
   dfn=1
 elif [ $1 == 'light' ]
 then
-  background="~/.config/backgrounds/pollock.jpg"
+  background="$HOME/.config/backgrounds/pollock.jpg"
   subl_cscheme="Packages/ayu/ayu-light.sublime-color-scheme"
   subl_theme="ayu-light.sublime-theme"
   code_theme="Ayu Light"
@@ -49,6 +49,14 @@ then
 
   sed -i 's|set \$wallpaper .*$|set \$wallpaper '"$background"'|g' ~/.config/sway/config  
 
+  # i3
+  sed -i 's|set \$bg .*$|set \$bg '"#$bg"'|g' ~/.config/i3/config
+  sed -i 's|set \$fg .*$|set \$fg '"#$fg"'|g' ~/.config/i3/config
+  sed -i 's|set \$fg-dark .*$|set \$fg-dark '"#$dfg"'|g' ~/.config/i3/config
+  sed -i 's|set \$accent .*$|set \$accent '"#$acc"'|g' ~/.config/i3/config
+
+  sed -i 's|set \$wallpaper .*$|set \$wallpaper '"$background"'|g' ~/.config/i3/config  
+  
   # rofi
   sed -i 's|rofi\.color-window: .*$|rofi\.color-window: argb:f5'"$bg"', argb:ff'"$acc"', argb:ff'"$acc"'|g' ~/.config/rofi/config
   sed -i 's|rofi\.color-normal: .*$|rofi\.color-normal: argb:00'"$bg"', '"#$fg"', argb:00'"$bg"', argb:00'"$bg"', '"#$acc"'|g' ~/.config/rofi/config
@@ -83,6 +91,8 @@ then
   # reload stuff
   kitty @ set-colors --all -c ~/.config/kitty/colors.conf
   swaymsg reload
+  i3-msg reload > /dev/null
+  feh --bg-fill $background
 
   # gtk
   gsettings set org.gnome.desktop.interface gtk-theme $gtk

@@ -7,9 +7,6 @@
 [submodule ".config/i3status/keyboard-layout"]
 	path = .config/i3status/keyboard-layout
 	url = https://github.com/porras/i3-keyboard-layout.git
-[submodule ".config/i3/notify-send"]
-	path = .config/i3/notify-send
-	url = https://github.com/vlevit/notify-send.sh.git
 [submodule ".zsh-syntax-highlighting"]
 	path = .zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
