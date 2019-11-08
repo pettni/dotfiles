@@ -1,10 +1,13 @@
-# I3 Window Manager
+# Install yadm and clone config
 
 ```
-sudo apt install i3 xserver-xorg-input-libinput feh autorandr arandr unclutter kitty \
-                 compton redshift pulseaudio-utils geoclue-2.0 playerctl xbacklight rofi \
-                 xinput blueman network-manager thunar xdotool lxappearance arc-theme 
+sudo apt install yadm
+yadm clone git@github.com:pettni/dotfiles.git
 ```
+**Run bootstrap script when prompted**
+
+
+# General x11 config
 
 ## Make sure libinput is managing touchpad
 
@@ -26,13 +29,6 @@ users=
 ```
 Add user to group ```geoclue```
 
-# Install yadm and clone config
-
-```
-sudo apt install yadm
-yadm clone git@github.com:pettni/dotfiles.git
-```
-Run bootstrap script when prompted to init submodules and install some fonts
 
 # Set up login manager
 
@@ -47,38 +43,15 @@ autologin-user=petter
 autologin-user-timeout=0%
 ```
 
-# Install Apps
-
-From apt:
-```
-sudo apt install thunderbird firefox gthumb okular
-```
-
-From other package repositories:
-```
-sudo apt-get install apt-transport-https
-
-# Emacs 26
-sudo add-apt-repository ppa:kelleyk/emacs
-
-# Sublime
-wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
-echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
-
-# Mendeley
-echo "deb https://desktop-download.mendeley.com/download/apt stable main" | sudo tee /etc/apt/sources.list.d/mendeleydesktop.list
-
-# Dropbox
-echo "deb [arch=i386,amd64] https://linux.dropboxstatic.com/ubuntu/ cosmic main" | sudo tee /etc/apt/sources.list.d/dropbox.list
-
-sudo apt update
-sudo apt install emacs26 sublime-text mendeleydesktop dropbox
-```
+# Other packages
 
 Not in apt:
  - Joplin: https://github.com/laurent22/joplin
  - libinput-gestures: https://github.com/bulletmark/libinput-gestures
- - Foxit reader: https://www.foxitsoftware.com/pdf-reader/
+ - kitty: https://github.com/kovidgoyal/kitty
+ - mako:  https://github.com/emersion/mako
+ - redshift:  https://github.com/minus7/redshift
+
 
 # LaTeX
 
@@ -101,8 +74,7 @@ sudo tlmgr install biblatex preprint environ logreq xstring trimspaces IEEEtran 
 Make sure python 3 is installed
 
 ```
-pip install virtualenv
-virtualenv -p python3.7 ~/.venvs/py3env   # change if using other python version
+python3 -m venv ~/.venvs/py3env   # change if using other python version
 echo "alias py3env='source ~/.venvs/py3env/bin/activate'" >> ~/.zshrc
 source ~/.zshrc
 ```

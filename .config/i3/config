@@ -37,7 +37,7 @@ set $default_gaps_inner 10
 set $default_gaps_outer 0
 
 # Terminal
-set $term $HOME/.local/bin/kitty
+set $term kitty
 set $menu rofi -show drun 
 
 # Font

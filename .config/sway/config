@@ -37,7 +37,7 @@ set $default_gaps_inner 10
 set $default_gaps_outer 0
 
 # Terminal
-set $term $HOME/.local/bin/kitty
+set $term kitty
 set $menu rofi -show drun 
 
 # Font
@@ -483,13 +483,13 @@ bindsym XF86AudioPrev exec playerctl previous
 
 # native wayland: use app_id
 for_window [app_id="thunar"] floating enable
-for_window [app_id="pavucontrol"] floating enable border normal
+for_window [app_id="pavucontrol"] floating enable
 for_window [app_id="gnome-calculator"] floating enable
 for_window [app_id="gnome-font-viewer"] floating enable
 
 # others: use class
 for_window [class="Gpick"] floating enable
-for_window [class="Lxappearance"] floating enable border normal
+for_window [class="Lxappearance"] floating enable
 
 # gtk theme
 exec_always $HOME/.config/sway/import-gsettings \

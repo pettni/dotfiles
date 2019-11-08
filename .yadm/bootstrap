@@ -1,16 +1,45 @@
 #!/bin/bash
 
-font_links=("https://github.com/libertinus-fonts/libertinus/releases/download/v6.6/libertinus-6.6.zip" # libertinus
+printf "Init submodules ...\n"
+yadm submodule update --recursive --init
+printf "Finished submodules \n\n"
+
+
+# apt packages
+sudo apt install xserver-xorg-input-libinput feh autorandr arandr unclutter \
+                 compton redshift pulseaudio-utils geoclue-2.0 playerctl xbacklight rofi \
+                 xinput blueman network-manager thunar xdotool lxappearance arc-theme
+
+sudo apt install thunderbird firefox gthumb okular
+sudo apt install fonts-firacode apt-transport-https
+
+# PPA packages
+sudo apt-add-repository ppa:kelleyk/emacs
+sudo apt-add-repository ppa:kgilmer/speed-ricer
+sudo apt-add-repository ppa:samoilov-lex/sway
+
+echo "deb [arch=i386,amd64] https://linux.dropboxstatic.com/ubuntu/ cosmic main" | sudo tee /etc/apt/sources.list.d/dropbox.list
+echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/chrome.list
+echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
+curl -s https://updates.signal.org/desktop/apt/keys.asc | sudo apt-key add -
+echo "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main" | sudo tee /etc/apt/sources.list.d/signal.list
+wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
+echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
+curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
+sudo install -o root -g root -m 644 packages.microsoft.gpg /usr/share/keyrings/
+sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
+
+sudo apt update
+sudo apt install dropbox google-chrome-stable emacs26 i3-gaps sway spotify-client signal-desktop sublime-text code
+
+font_links=("https://github.com/alif-type/libertinus/releases/download/v6.10/Libertinus-6.10.zip" # libertinus
 	    "https://github.com/supermarin/YosemiteSanFranciscoFont/archive/master.zip"                # san fran
-	    "https://use.fontawesome.com/releases/v5.7.2/fontawesome-free-5.7.2-desktop.zip")          # awesome
+	    "https://use.fontawesome.com/releases/v5.11.2/fontawesome-free-5.11.2-web.zip")          # awesome
 
 # Because Git submodule commands cannot operate without a work tree, they must
 # be run from within $HOME (assuming this is the root of your dotfiles)
 cd "$HOME"
 
-printf "Init submodules ...\n"
-yadm submodule update --recursive --init
-printf "Finished submodules \n\n"
 
 printf "Installing fonts ...\n"
 for file in ${font_links[@]}

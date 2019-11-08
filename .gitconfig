@@ -1,7 +1,7 @@
 [user]
-	email = pettni@caltech.edu
-	name = Petter Nilsson
-	signingkey = 28BB09FDFE3CE86D
+    email = pettni@caltech.edu
+    name = Petter Nilsson
+    signingkey = 28BB09FDFE3CE86D
 
 [diff]
     tool = kitty
@@ -14,4 +14,4 @@
 [difftool "kitty.gui"]
     cmd = kitty kitty +kitten diff $LOCAL $REMOTE
 [commit]
-	gpgsign = true
+    gpgsign = true
