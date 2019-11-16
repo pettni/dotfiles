@@ -1,4 +1,4 @@
-export ZSH="/home/petter/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 export ZSH_THEME="robbyrussell"
 plugins=(
     command-not-found
